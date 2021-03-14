@@ -4,27 +4,27 @@ from .models import *
 class WordPortugueseSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordPortuguese
-        fields = ['portuguese_word']
+        fields = ['wordPortuguese']
 
 class PronunciationTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PronunciationType
-        fields = ['pronunciation_type']
+        fields = ['pronunciationType']
 
 class PhrasePortugueseSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhrasePortuguese
-        fields = ['portuguese_phrase']
+        fields = ['phrasePortuguese']
 
 class WordKokamaSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordKokama
-        fields = ['kokama_word', 'pronunciation_type']
+        fields = ['wordKokama']
 
 class PhraseKokamaSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhraseKokama
-        fields = ['kokama_phrase', 'portuguese_phrase']
+        fields = ['phraseKokama']
 
 class traduzSerializer(serializers.ModelSerializer):
     class Meta:
