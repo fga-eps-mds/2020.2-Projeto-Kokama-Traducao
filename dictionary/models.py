@@ -56,6 +56,3 @@ class traduz(models.Model):
         WordKokama,
         on_delete= models.DO_NOTHING
     )
-
-
-
