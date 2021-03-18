@@ -17,14 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from dictionary.views import *
+from dictionary.views import KokamaViewSet
+
 
 router = routers.DefaultRouter()
-router.register(r'palavra-portugues', WordPortugueseViewSet)
-router.register(r'palavra-kokama', WordKokamaViewSet)
-router.register(r'frase-portugues', PhrasePortugueseViewSet)
-router.register(r'frase-kokama', PhraseKokamaViewSet)
-router.register(r'tipo-pronuncia', PronunciationTypeViewSet)
+router.register(r'dicionario', KokamaViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
