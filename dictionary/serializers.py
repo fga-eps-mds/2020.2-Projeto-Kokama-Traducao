@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import *
+from .models import WordKokama, WordPortuguese
+from .models import PronunciationType, PhrasePortuguese, PhraseKokama
 
 
 class WordPortugueseSerializer(serializers.ModelSerializer):

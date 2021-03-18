@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import *
+from .models import WordPortuguese, WordKokama, Translate
+from .models import PhraseKokama, PhrasePortuguese, PronunciationType
 
 
 admin.site.register(WordPortuguese)
