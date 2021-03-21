@@ -1,0 +1,92 @@
+[
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 1,
+        "fields": {
+            "phrase_kokama": "Emete ipiranu <pachakatika> iruataka chiranu.",
+            "word_kokama": 1,
+            "phrase_portuguese": 1
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 2,
+        "fields": {
+            "phrase_kokama": "Nós <esmagamos> a massa para fazer um assento de jarro.",
+            "word_kokama": 2,
+            "phrase_portuguese": 2
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 3,
+        "fields": {
+            "phrase_kokama": "<Pachuri> eyu watsatsa iya.",
+            "word_kokama": 3,
+            "phrase_portuguese": 3
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 4,
+        "fields": {
+            "phrase_kokama": "Tsa <pai> papa imua",
+            "word_kokama": 4,
+            "phrase_portuguese": 4
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 5,
+        "fields": {
+            "phrase_kokama": "Yawiri <pain>pura tsa papa erura.",
+            "word_kokama": 5,
+            "phrase_portuguese": 5
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 6,
+        "fields": {
+            "phrase_kokama": "<Pararaka> yute kuarachika ya ikanatsen.",
+            "word_kokama": 6,
+            "phrase_portuguese": 6
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 7,
+        "fields": {
+            "phrase_kokama": "Ipira na ikanata <pararaka>.",
+            "word_kokama": 6,
+            "phrase_portuguese": 7
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 8,
+        "fields": {
+            "phrase_kokama": "Tsetsa na tɨata unipu <pararaka>.",
+            "word_kokama": 6,
+            "phrase_portuguese": 8
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 9,
+        "fields": {
+            "phrase_kokama": "<Penu> kumitsa",
+            "word_kokama": 7,
+            "phrase_portuguese": 9
+        }
+    },
+    {
+        "model": "dictionary.phrasekokama",
+        "pk": 10,
+        "fields": {
+            "phrase_kokama": "<Ini> kumitsa",
+            "word_kokama": 8,
+            "phrase_portuguese": 9
+        }
+    }
+]

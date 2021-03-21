@@ -1,0 +1,23 @@
+[
+    {
+        "model": "dictionary.pronunciationtype",
+        "pk": 1,
+        "fields": {
+            "pronunciation_type": "geral"
+        }
+    },
+    {
+        "model": "dictionary.pronunciationtype",
+        "pk": 2,
+        "fields": {
+            "pronunciation_type": "feminino"
+        }
+    },
+    {
+        "model": "dictionary.pronunciationtype",
+        "pk": 3,
+        "fields": {
+            "pronunciation_type": "masculino"
+        }
+    }
+]
