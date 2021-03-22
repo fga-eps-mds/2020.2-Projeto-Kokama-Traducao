@@ -55,7 +55,7 @@
                 padding: 40px;
                 background-color: rgba(255, 255, 255, .9);
                 box-sizing: border-box;
-                box-shadow: 0 15px 25px rgba(0, 0, 0,);
+                box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
                 border-radius: 7px;
             }
 
@@ -111,6 +111,13 @@
                     <input name="kokama_word" type="text" required>
                     <label>Palavra em Kokama:</label>
                 </div>
+
+                <label for="pronunciation_type">Escolha um tipo de pronuncia:</label>
+                <select class='input-box' name="pronunciation_type">
+                    <option value="geral">Geral</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
 
                 <div class='input-box'>
                     <input name="phrase_portuguese" type="text" required>
