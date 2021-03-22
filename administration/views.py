@@ -12,8 +12,9 @@ def signup(request):
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password1')
                 user = authenticate(username=username, password=raw_password)
-                login(request, user)
-                return redirect('home')
+                user.is_superuser = True
+                user.save()
+                return redirect('/admin/')
         else:
             form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
