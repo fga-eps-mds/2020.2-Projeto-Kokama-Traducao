@@ -8,6 +8,5 @@ def add_translate(request):
         elif(request.method == 'POST'):
             print(request.POST.get('kokama_word'))
 
-        return HttpResponse('Sou adminstrador fom')
     else:
         return HttpResponse('APENAS ADMINISTRADORES')
