@@ -13,7 +13,6 @@ def add_translate(request):
             pronunciation_type = request.POST.get('type_pronunciation')
             phrase_portuguese = request.POST.get('phrase_portuguese')
             phrase_kokama = request.POST.get('phrase_kokama')
-            # translate = request.POST.get('translate')
             
             wordPortuguese = WordPortuguese(word_portuguese=portuguese_word)
             wordPortuguese.save()
@@ -32,6 +31,13 @@ def add_translate(request):
             translate = Translate(word_kokama=wordKokama, word_portuguese=wordPortuguese)
             translate.save()
 
-            return render(request, 'okay_translation.html')
+            return render(request, 'list_translation.html')
     else:
         return HttpResponse('APENAS ADMINISTRADORES')
+
+def list_translation (request):
+    if(request.method == 'GET'):
+        return render(request, 'list_translation.html')
+    else:
+        return HttpResponse('TELA ERRADA')
+
