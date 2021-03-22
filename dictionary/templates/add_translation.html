@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Cadastrar Tradução</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        
+        </style>
+    </head>
+
+    <body>
+        <form action='/administrador/adicionar_palavra/' method='POST'>
+            {% csrf_token %}
+            
+            <div class='input-box'>
+                <input name="portuguese_word" type="text" required>
+                <label>Palavra em Português:</label>
+            </div>
+
+            <div class='input-box'>
+                <input name="kokama_word" type="text" required>
+                <label>Palavra em Kokama:</label>
+            </div>
+
+            <div class='input-box'>
+                <input name="phrase_portuguese" type="text" required>
+                <label>Frase em Português:</label>
+            </div>
+
+            <div class='input-box'>
+                <input name="phrase_kokama" type="text" required>
+                <label>Frase em Kokama:</label>
+            </div>
+            <input name="submit" type="submit" value='Enviar'>
+        </form>    
+    </body>
+
+</html>
