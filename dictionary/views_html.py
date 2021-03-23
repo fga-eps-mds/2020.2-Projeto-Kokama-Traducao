@@ -6,8 +6,10 @@ from .models import PhrasePortuguese, PhraseKokama, PronunciationType,Translate
 def add_translate(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
+
             return render(request, 'add_translation.html')
         elif(request.method == 'POST'):
+            form = form_class(request.POST)
             portuguese_word = request.POST.get('portuguese_word')
             kokama_word = request.POST.get('kokama_word')
             pronunciation_type = request.POST.get('type_pronunciation')

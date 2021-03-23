@@ -124,6 +124,16 @@
                 border: 1px solid #F23232;
                 color: #000000;
             }
+            .list-word{
+                font-size: 16px;
+                color: #000000;
+                letter-spacing: 1px;
+                left: 0;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                text-decoration:none;
+                padding-left: 10px;
+            }
 
         </style>
     </head>
@@ -153,7 +163,9 @@
                     <a class='word-kokama' href="https://www.google.com/">{{ item.word_kokama}}</a>
                 </div>
             {% empty %} 
-                <a>somethings is wrong</a>
+                <div class= 'word-list'>
+                    <a class='list-word'>Não há palavras cadastradas</a>
+                </div>
             {% endfor %}
         </div>
 
