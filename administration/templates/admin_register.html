@@ -55,7 +55,6 @@
   }
 
   .box input[type='submit']{
-      background: transparent;
       width: 100%;
       border: none;
       outline: none;
@@ -87,26 +86,33 @@
 
   
   <div class = "box">
-    <h2>Cadastro de Administrador</h2>
+    <h2>Cadastrar novo Administrador</h2>
     <form action = "/admin_register/" method="post">
       {% csrf_token %}
       
-        <p>
-          <div class = "input-box">
-            <input name = 'username' type='text' required>
-            <label>Nome de usuário:</label>
-          </div>
-          <div class = "input-box">
-            <input name = 'password1' type='password' required>
-            <label>Senha:</label> 
-          </div>
-          <div class = "input-box">
-           <input name = 'password2' type='password' required>
-           <label>Confirme a senha:</label> 
-          </div>
-        </p>
+      {% for error in form.username.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      <div class = "input-box">
+        <input name = 'username' type='text' required>
+        <label>Nome de usuário:</label>
+      </div>
+      {% for error in form.password1.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      <div class = "input-box">
+        <input name = 'password1' type='password' required>
+        <label>Senha:</label> 
+      </div>
+      {% for error in form.password2.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      <div class = "input-box">
+        <input name = 'password2' type='password' required>
+        <label>Confirme a senha:</label> 
+      </div>
     
-      <input name="submit" type="submit">
+      <input value="Cadastrar" name="submit" type="submit">
     </form>
   </div>
   

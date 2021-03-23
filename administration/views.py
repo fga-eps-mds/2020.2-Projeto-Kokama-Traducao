@@ -14,13 +14,15 @@ def admin_register(request):
                 raw_password = form.cleaned_data.get('password1')
                 user = authenticate(username=username, password=raw_password)
                 user.is_superuser = True
+                user.is_staff = True
                 user.save()
                 return redirect('/admin/')
         else:
             form = UserCreationForm()
         return render(request, 'admin_register.html', {'form': form})
     else:
-        return HttpResponse('<h1>Page not authorized</h1>', status=401)
+        return HttpResponse('<h1>Você não tem autorização para  visualizar esta página</h1>',
+                            status=401)
 
 def login(request):
         if request.method == 'POST':

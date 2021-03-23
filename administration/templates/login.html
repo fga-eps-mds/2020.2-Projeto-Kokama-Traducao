@@ -55,7 +55,6 @@
   }
 
   .box input[type='submit']{
-      background: transparent;
       width: 100%;
       border: none;
       outline: none;
@@ -90,19 +89,23 @@
     <h2>Login</h2>
     <form action = "/login/" method="post">
       {% csrf_token %}
-      
-        <p>
-          <div class = "input-box">
-            <input name = 'username' type='text' required>
-            <label>Nome de usuário:</label>
-          </div>
-          <div class = "input-box">
-            <input name = 'password' type='password' required>
-            <label>Senha:</label> 
-          </div>
-        </p>
+  
+      {% for error in form.username.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      <div class = "input-box">
+        <input name = 'username' type='text' required>
+        <label>Nome de usuário:</label>
+      </div>
+      {% for error in form.password.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      <div class = "input-box">
+        <input name = 'password' type='password' required>
+        <label>Senha:</label>
+      </div>
     
-      <input name="submit" type="submit">
+      <input value="Entrar" name="submit" type="submit">
     </form>
   </div>
   
