@@ -3,7 +3,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login as django_login
+from django.views.decorators.http import require_http_methods
 
+@require_http_methods(["GET", "POST"])
 def admin_register(request):
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -24,6 +26,7 @@ def admin_register(request):
         return HttpResponse('<h1>Você não tem autorização para  visualizar esta página</h1>',
                             status=401)
 
+@require_http_methods(["GET", "POST"])
 def login(request):
         if request.method == 'POST':
             form = AuthenticationForm(data = request.POST)
