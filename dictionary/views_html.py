@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import WordKokama, WordPortuguese
 from .models import PhrasePortuguese, PhraseKokama, PronunciationType,Translate
 
@@ -31,13 +31,17 @@ def add_translate(request):
             translate = Translate(word_kokama=wordKokama, word_portuguese=wordPortuguese)
             translate.save()
 
-            return render(request, 'list_translation.html')
+            return redirect('/administrador/lista_de_palavras/')
     else:
         return HttpResponse('APENAS ADMINISTRADORES')
 
 def list_translation (request):
     if(request.method == 'GET'):
-        return render(request, 'list_translation.html')
+        word_kokama = WordKokama.objects.all()
+
+        context = {
+            'word_kokama': word_kokama,
+        }
+        return render(request, 'list_translation.html',{'object':word_kokama})
     else:
         return HttpResponse('TELA ERRADA')
-
