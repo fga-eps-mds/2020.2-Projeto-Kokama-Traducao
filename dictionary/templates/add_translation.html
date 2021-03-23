@@ -6,6 +6,13 @@
         <title>Cadastrar Tradução</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+
+            body{
+                display: flex;
+                align-content: center;
+                flex-direction: column;
+            }
+
             .input-box{
                 position: relative;
             }
@@ -47,12 +54,12 @@
                 display: flex;
                 flex-direction: column;
                 flex-grow: 4;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) ;
+                text-align: center;
+                justify-self: center;
+                align-self: center;
                 width: 400px;
                 padding: 40px;
+                margin-top: 20px;
                 background-color: rgba(255, 255, 255, .9);
                 box-sizing: border-box;
                 box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
@@ -75,17 +82,32 @@
                 background-color: #FFFFFF;
                 display: flex;
                 align-items: center;
+                border-bottom: 1px solid #000000;
             }
 
             .logo{
+                display: flex;
                 width: 45px;
                 height: 45px;
                 margin-left: 10px;
+                align-self: center;
+                margin-top: 3px;
+                margin-bottom: 7px;
+            }
+
+            .logo:hover{
+                opacity: 60%;
             }
 
             .logo-text{
                 font-size: 20px;
                 margin-left: 20px;
+                color: #000000;
+                text-decoration:none;
+            }
+
+            .logo-text:hover{
+                color: #F23232;
             }
 
             .drop-down-box{
@@ -120,10 +142,13 @@
 
     <body>
         <div class='header'>
-            <img class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
-            <a class='logo-text'>Projeto Kokama</a>
+            
+            <a href="/administrador/lista_de_palavras/">
+                <img class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+            </a>
+
+            <a class='logo-text' href="/administrador/lista_de_palavras/">Projeto Kokama</a>
         </div>
-        <hr>
         
         <div class='box'>
             <form action='/administrador/adicionar_palavra/' method='POST'>
