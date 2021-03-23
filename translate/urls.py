@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from dictionary.views import KokamaViewSet
-from administration.views import admin_register
+from administration.views import admin_register, login
 
 
 router = routers.DefaultRouter()
@@ -27,6 +27,6 @@ router.register(r'dicionario', KokamaViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('admin_register/', admin_register)
-   
+    path('admin_register/', admin_register),
+    path('login/', login)
 ]
