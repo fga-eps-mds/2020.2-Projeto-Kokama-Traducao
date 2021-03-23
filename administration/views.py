@@ -24,26 +24,21 @@ def admin_register(request):
 
 def login(request):
         if request.method == 'POST':
-            print('######')
-            print('passei do primeiro if')
-            print('######')
             form = AuthenticationForm(data = request.POST)
-            print(request.POST)
             if form.is_valid():
-                print('######')
-                print('passei do segundo if')
-                print('######')
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password')
                 user = authenticate(username=username, password=raw_password)
                 django_login(request, user)
                 if user.is_superuser:
-                    print('######')
-                    print(user.is_superuser)
-                    print('######')
                     return redirect('/admin/') 
                 else:
                     return redirect('/dicionario/')
         else:
+            if request.user.is_authenticated:
+                if request.user.is_superuser:
+                    return redirect('/admin/')
+                else:
+                    return redirect('/dicionario/')
             form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})

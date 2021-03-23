@@ -25,8 +25,9 @@ router = routers.DefaultRouter()
 router.register(r'dicionario', KokamaViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    #path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('admin_register/', admin_register),
-    path('login/', login)
+    path('login/', login),
+    path('', login, name ='login')
 ]
