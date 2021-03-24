@@ -12,15 +12,15 @@
     <body>
         <div class='header'>
             
-            <a href="/administrador/lista_de_palavras/">
+            <a href="/traducao/lista_de_palavras/">
                 <img alt class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
             </a>
 
-            <a class='logo-text' href="/administrador/lista_de_palavras/">Projeto Kokama</a>
+            <a class='logo-text' href="/traducao/lista_de_palavras/">Projeto Kokama</a>
         </div>
         
         <div class='box-admin-register'>
-            <form action='/administrador/adicionar_palavra/' method='POST'>
+            <form action='/traducao/adicionar_palavra/' method='POST'>
                 {% csrf_token %}
                 
                 <div class='input-box'>
@@ -37,8 +37,8 @@
                     <label class = 'drop-down-text' for="type_pronunciation">Escolha um tipo de pronúncia:</label>
                     <select class='drop-down' name="type_pronunciation">
                         <option value="1">Geral</option>
-                        <option value="2">Masculino</option>
-                        <option value="3">Feminino</option>
+                        <option value="2">Feminino</option>
+                        <option value="3">Masculino</option>
                     </select>
                 </div>
                 

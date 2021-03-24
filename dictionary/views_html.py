@@ -32,18 +32,23 @@ def add_translate(request):
 
             translate = Translate(word_kokama=wordKokama, word_portuguese=wordPortuguese)
             translate.save()
-            return redirect('/administrador/lista_de_palavras/')
+            return redirect('/traducao/lista_de_palavras/')
     else:
-        return HttpResponse('APENAS ADMINISTRADORES')
+        return HttpResponse('<h1>Você não tem autorização para visualizar esta página</h1>',
+                            status=401)
 
 @require_http_methods(["GET", "POST"])
 def list_translation (request):
-    if(request.method == 'GET'):
-        word_kokama = WordKokama.objects.all()
+    if(request.user.is_superuser):
+        if(request.method == 'GET'):
+            word_kokama = WordKokama.objects.all()
 
-        context = {
-            'word_kokama': word_kokama,
-        }
-        return render(request, 'list_translation.html',{'object':word_kokama})
+            context = {
+                'word_kokama': word_kokama,
+            }
+            return render(request, 'list_translation.html',{'object':word_kokama})
+        else:
+            return HttpResponse('<h1>Erro interno do servidor</h1>', status=500)
     else:
-        return HttpResponse('TELA ERRADA')
+        return HttpResponse('<h1>Você não tem autorização para visualizar esta página</h1>',
+                            status=401)

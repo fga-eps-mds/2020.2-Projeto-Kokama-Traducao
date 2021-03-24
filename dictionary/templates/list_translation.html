@@ -13,27 +13,27 @@
 
     <body>
         <div class='header'>
-            <a href="/administrador/lista_de_palavras/">
+            <a href="/traducao/lista_de_palavras/">
                 <img alt class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
             </a>
             
-            <a class='logo-text'href="/administrador/lista_de_palavras/">Projeto Kokama</a>
+            <a class='logo-text'href="/traducao/lista_de_palavras/">Projeto Kokama</a>
         </div>
         <div class='box-list'>
             
             <div class='title-box'>
                 <h1 class='box-title'>Lista de Palavras em Kokama</h1>
-                <a class='add-buttom' href="/administrador/adicionar_palavra/">Adicionar Palavras</a>
+                <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
             </div>
             
             {% for item in object %}
                 <div class='word-list'>
 
-                    <a class='icon' href="https://www.google.com/">
+                    <a class='icon'>
                         <em class="material-icons">mode_edit</em>
                     </a>
 
-                    <a class='word-kokama' href="https://www.google.com/">{{ item.word_kokama}}</a>
+                    <a class='word-kokama'>{{ item.word_kokama}}</a>
                 </div>
             {% empty %} 
                 <div class= 'word-list'>

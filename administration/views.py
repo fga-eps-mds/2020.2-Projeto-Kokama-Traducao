@@ -18,12 +18,12 @@ def admin_register(request):
                 user.is_superuser = True
                 user.is_staff = True
                 user.save()
-                return redirect('/admin/')
+                return redirect('/traducao/lista_de_palavras/')
         else:
             form = UserCreationForm()
         return render(request, 'admin_register.html', {'form': form})
     else:
-        return HttpResponse('<h1>Você não tem autorização para  visualizar esta página</h1>',
+        return HttpResponse('<h1>Você não tem autorização para visualizar esta página</h1>',
                             status=401)
 
 @require_http_methods(["GET", "POST"])
@@ -36,13 +36,13 @@ def login(request):
                 user = authenticate(username=username, password=raw_password)
                 django_login(request, user)
                 if user.is_superuser:
-                    return redirect('/admin/') 
+                    return redirect('/traducao/lista_de_palavras/') 
                 else:
                     return redirect('/dicionario/')
         else:
             if request.user.is_authenticated:
                 if request.user.is_superuser:
-                    return redirect('/admin/')
+                    return redirect('/traducao/lista_de_palavras/')
                 else:
                     return redirect('/dicionario/')
             form = AuthenticationForm()
