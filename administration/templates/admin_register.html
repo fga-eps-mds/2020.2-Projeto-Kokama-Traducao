@@ -1,38 +1,47 @@
 {% block content %}
 
 <link rel="stylesheet" type="text/css"
-href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616543772/style_ywhhmx.css">
+  href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616550835/style.css_rovd3q.css">
 
-  
-<div class = "box">
+<div class='header'>
+
+  <a href="/administrador/lista_de_palavras/">
+    <img alt class='logo'
+      src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+  </a>
+
+  <a class='logo-text' href="/administrador/lista_de_palavras/">Projeto Kokama</a>
+</div>
+
+<div class="box-admin-register">
   <h2>Cadastrar novo Administrador</h2>
-  <form action = "/admin_register/" method="post">
+  <form action="/admin_register/" method="post">
     {% csrf_token %}
-    
+
     {% for error in form.username.errors %}
-      <p style="color: red">{{ error }}</p>
+    <p style="color: red">{{ error }}</p>
     {% endfor %}
-    <div class = "input-box">
-      <input name = 'username' type='text' required>
+    <div class="input-box">
+      <input name='username' type='text' required>
       <label>Nome de usuário:</label>
     </div>
     {% for error in form.password1.errors %}
-      <p style="color: red">{{ error }}</p>
+    <p style="color: red">{{ error }}</p>
     {% endfor %}
-    <div class = "input-box">
-      <input name = 'password1' type='password' required>
-      <label>Senha:</label> 
+    <div class="input-box">
+      <input name='password1' type='password' required>
+      <label>Senha:</label>
     </div>
     {% for error in form.password2.errors %}
-      <p style="color: red">{{ error }}</p>
+    <p style="color: red">{{ error }}</p>
     {% endfor %}
-    <div class = "input-box">
-      <input name = 'password2' type='password' required>
-      <label>Confirme a senha:</label> 
+    <div class="input-box">
+      <input name='password2' type='password' required>
+      <label>Confirme a senha:</label>
     </div>
-  
+
     <input value="Cadastrar" name="submit" type="submit">
   </form>
 </div>
-  
+
 {% endblock %}

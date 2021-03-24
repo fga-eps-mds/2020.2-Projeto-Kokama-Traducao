@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xml:lang>
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Cadastrar Tradução</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css"
+        href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616550835/style.css_rovd3q.css">
+    </head>
+
+    <body>
+        <div class='header'>
+            
+            <a href="/administrador/lista_de_palavras/">
+                <img alt class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+            </a>
+
+            <a class='logo-text' href="/administrador/lista_de_palavras/">Projeto Kokama</a>
+        </div>
+        
+        <div class='box-admin-register'>
+            <form action='/administrador/adicionar_palavra/' method='POST'>
+                {% csrf_token %}
+                
+                <div class='input-box'>
+                    <input name="portuguese_word" type="text" required>
+                    <label>Palavra em Português:</label>
+                </div>
+
+                <div class='input-box'>
+                    <input name="kokama_word" type="text" required>
+                    <label>Palavra em Kokama:</label>
+                </div>
+
+                <div class = 'drop-down-box'>
+                    <label class = 'drop-down-text' for="type_pronunciation">Escolha um tipo de pronúncia:</label>
+                    <select class='drop-down' name="type_pronunciation">
+                        <option value="1">Geral</option>
+                        <option value="2">Masculino</option>
+                        <option value="3">Feminino</option>
+                    </select>
+                </div>
+                
+                <div class='input-box'>
+                    <input name="phrase_portuguese" type="text" required>
+                    <label>Frase em Português:</label>
+                </div>
+
+                <div class='input-box'>
+                    <input name="phrase_kokama" type="text" required>
+                    <label>Frase em Kokama:</label>
+                </div>
+                <input name="submit" type="submit" value='Enviar'>
+            </form>
+        </div>    
+    </body>
+
+</html>

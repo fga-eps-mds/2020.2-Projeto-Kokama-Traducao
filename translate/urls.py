@@ -27,7 +27,9 @@ router.register(r'dicionario', KokamaViewSet)
 urlpatterns = [
     #path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('administrador/', include('dictionary.urls')),
     path('admin_register/', admin_register),
     path('login/', login),
     path('', login, name ='login')
+
 ]
