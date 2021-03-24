@@ -1,0 +1,65 @@
+[
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 1,
+        "fields": {
+            "phrase_portuguese": "Há <centenas> de peixes de toda classe de nomes."
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 2,
+        "fields": {
+            "phrase_portuguese": "Nós <esmagamos> a massa para fazer um assento de jarro."
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 3,
+        "fields": {
+            "phrase_portuguese": "O <pía pía> come semente de abiu."
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 4,
+        "fields": {
+            "phrase_portuguese": "Meu <tio> é irmão de papai"
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 5,
+        "fields": {
+            "phrase_portuguese": "<Só> a mandioca traz meu pai."
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 6,
+        "fields": {
+            "phrase_portuguese": "<Espalhe> essa juta em direção ao sol (não na sombra) para secar."
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 7,
+        "fields": {
+            "phrase_portuguese": "Seque o peixe <espalhando-o>. "
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 8,
+        "fields": {
+            "phrase_portuguese": "Umedeça as flores <regando-as>."
+        }
+    },
+    {
+        "model": "dictionary.phraseportuguese",
+        "pk": 9,
+        "fields": {
+            "phrase_portuguese": "<Nós> falamos."
+        }
+    }
+]

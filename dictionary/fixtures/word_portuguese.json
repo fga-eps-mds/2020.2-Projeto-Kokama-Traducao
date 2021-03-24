@@ -1,0 +1,93 @@
+[
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 1,
+        "fields": {
+            "word_portuguese": "cem"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 2,
+        "fields": {
+            "word_portuguese": "aderir"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 3,
+        "fields": {
+            "word_portuguese": "fixar"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 4,
+        "fields": {
+            "word_portuguese": "colar"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 5,
+        "fields": {
+            "word_portuguese": "pía pía"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 6,
+        "fields": {
+            "word_portuguese": "tio"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 7,
+        "fields": {
+            "word_portuguese": "apenas"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 8,
+        "fields": {
+            "word_portuguese": "puro"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 9,
+        "fields": {
+            "word_portuguese": "não misturado"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 10,
+        "fields": {
+            "word_portuguese": "dispersar"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 11,
+        "fields": {
+            "word_portuguese": "regar"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 12,
+        "fields": {
+            "word_portuguese": "distribuir"
+        }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 13,
+        "fields": {
+            "word_portuguese": "nós"
+        }
+    }
+]
