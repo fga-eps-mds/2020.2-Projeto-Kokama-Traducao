@@ -3,4 +3,4 @@ build:
     web: Dockerfile
 
 run:
-  web: sh entrypoint.sh
+  web: sh heroku-entrypoint.sh
