@@ -22,14 +22,13 @@ from administration.views import admin_register, login
 
 
 router = routers.DefaultRouter()
-router.register(r'dicionario', KokamaViewSet)
+router.register(r'', KokamaViewSet)
 
 urlpatterns = [
-    #path('', include(router.urls)),
+    path('dicionario/', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('administrador/', include('dictionary.urls')),
+    path('traducao/', include('dictionary.urls')),
     path('admin_register/', admin_register),
     path('login/', login),
     path('', login, name ='login')
-
 ]
