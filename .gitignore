@@ -1,4 +1,4 @@
-translate/__pycache__
-dictionary/__pycache__
-dictionary/migrations
+__pycache__/
+migrations/
 .vscode
+**.env

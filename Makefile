@@ -1,5 +1,5 @@
 default:
-	docker-compose up
+	docker-compose up --build
 
 enter:
 	docker-compose exec web bash
