@@ -1,0 +1,96 @@
+[
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 1,
+        "fields": {
+            "word_kokama": "pacha",
+            "pronunciation_type": 1,
+            "translations": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 2,
+        "fields": {
+            "word_kokama": "pachata",
+            "pronunciation_type": 1,
+            "translations": [
+                2,
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 3,
+        "fields": {
+            "word_kokama": "pachuri",
+            "pronunciation_type": 1,
+            "translations": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 4,
+        "fields": {
+            "word_kokama": "pai",
+            "pronunciation_type": 1,
+            "translations": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 5,
+        "fields": {
+            "word_kokama": "pain",
+            "pronunciation_type": 1,
+            "translations": [
+                7,
+                8,
+                9
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 6,
+        "fields": {
+            "word_kokama": "pararaka",
+            "pronunciation_type": 1,
+            "translations": [
+                10,
+                11,
+                12
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 7,
+        "fields": {
+            "word_kokama": "penu",
+            "pronunciation_type": 2,
+            "translations": [
+                13
+            ]
+        }
+    },
+    {
+        "model": "dictionary.wordkokama",
+        "pk": 8,
+        "fields": {
+            "word_kokama": "ini",
+            "pronunciation_type": 1,
+            "translations": [
+                13
+            ]
+        }
+    }
+]

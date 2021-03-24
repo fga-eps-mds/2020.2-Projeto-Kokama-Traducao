@@ -1,1 +1,4 @@
-translate/__pycache__
+__pycache__/
+migrations/
+.vscode
+**.env
