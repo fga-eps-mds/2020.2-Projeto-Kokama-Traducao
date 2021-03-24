@@ -5,138 +5,8 @@
         <meta charset="UTF-8" />
         <title>Cadastrar Tradução</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-
-            body{
-                display: flex;
-                align-content: center;
-                flex-direction: column;
-            }
-
-            .input-box{
-                position: relative;
-            }
-
-            .input-box label{
-                position: absolute;
-                /*top: 0;*/
-                left: 0;
-                letter-spacing: 1px;
-                padding: 10px 0;
-                font-size: 16px;
-                color: #000000;
-                pointer-events: none;
-                transition: .5s;
-            }
-
-            .input-box input{
-                width: 100%;
-                padding: 10px 0;
-                font-size: 16px;
-                color: #000000;
-                letter-spacing: 1px;
-                margin-bottom: 30px;
-                border: none;
-                border-bottom: 1px solid #000000;
-                outline: none;
-                background: transparent;
-            }
-
-            .input-box input:focus~label,
-            .input-box input:valid~label{
-                top:-18px;
-                left: 0;
-                color: #F23232;
-                font-size: 12px;
-            }
-
-            .box{
-                display: flex;
-                flex-direction: column;
-                flex-grow: 4;
-                text-align: center;
-                justify-self: center;
-                align-self: center;
-                width: 400px;
-                padding: 40px;
-                margin-top: 20px;
-                background-color: rgba(255, 255, 255, .9);
-                box-sizing: border-box;
-                box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
-                border-radius: 7px;
-            }
-
-            .box input[type='submit']{
-                background: transparent ,#F23232;
-                width: 100%;
-                border: none;
-                outline: none;
-                color: #FFFFFF;
-                padding: 10px 20px;
-                cursor: pointer;
-                border-radius: 5px;
-            }
-
-            .header{
-                background-color: #FFFFFF;
-                display: flex;
-                align-items: center;
-                border-bottom: 1px solid #000000;
-            }
-
-            .logo{
-                display: flex;
-                width: 45px;
-                height: 45px;
-                margin-left: 10px;
-                align-self: center;
-                margin-top: 3px;
-                margin-bottom: 7px;
-            }
-
-            .logo:hover{
-                opacity: 60%;
-            }
-
-            .logo-text{
-                font-size: 20px;
-                margin-left: 20px;
-                color: #000000;
-                text-decoration:none;
-            }
-
-            .logo-text:hover{
-                color: #F23232;
-            }
-
-            .drop-down-box{
-                display:flex;
-                position: relative;
-                left: 0;
-                color: #F23232;
-                font-size: 12px;
-            }
-
-            .drop-down-text{
-                position: absolute;
-                top:-18px;
-                letter-spacing: 1px;
-            }
-
-            .drop-down {
-                border: none;
-                outline: none;
-                margin-bottom: 20px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #000000;
-                background-color: #FFFFFF;
-                width: 100%;
-                font-size: 16px;
-                letter-spacing: 1px;
-            }
-
-
-        </style>
+        <link rel="stylesheet" type="text/css"
+        href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616550835/style.css_rovd3q.css">
     </head>
 
     <body>
@@ -149,7 +19,7 @@
             <a class='logo-text' href="/administrador/lista_de_palavras/">Projeto Kokama</a>
         </div>
         
-        <div class='box'>
+        <div class='box-admin-register'>
             <form action='/administrador/adicionar_palavra/' method='POST'>
                 {% csrf_token %}
                 
