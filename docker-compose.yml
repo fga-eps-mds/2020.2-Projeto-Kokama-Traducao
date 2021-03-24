@@ -5,9 +5,9 @@ services:
     container_name: translate-db
     image: postgres
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 2s
@@ -17,7 +17,7 @@ services:
   web:
     build: .
     container_name: translate-microservice
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "sh entrypoint.sh"
     volumes:
       - .:/code
     ports:
