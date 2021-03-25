@@ -1,48 +1,274 @@
 <!DOCTYPE html>
 <html xml:lang>
 
-    <head>
-        <meta charset="UTF-8" />
-        <title>Lista de Palavras Dicionário</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css"
-        href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616550835/style.css_rovd3q.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Palavras Dicionário</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" type="text/css"
+        href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616550835/style.css_rovd3q.css">-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    </head>
+    <style>
+        body {
+            display: flex;
+            align-content: center;
+            flex-direction: column;
+        }
 
-    <body>
-        <div class='header'>
-            <a href="/traducao/lista_de_palavras/">
-                <img alt class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+        .input-box {
+            position: relative;
+        }
+
+        .input-box label {
+            position: absolute;
+            left: 0;
+            letter-spacing: 1px;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #000000;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #000000;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #000000;
+            outline: none;
+            background: transparent;
+        }
+
+        .input-box input:focus~label,
+        .input-box input:valid~label {
+            top: -18px;
+            left: 0;
+            color: #F23232;
+            font-size: 12px;
+        }
+
+        .box-list {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 4;
+            text-align: center;
+            justify-self: center;
+            align-self: center;
+            width: 650px;
+            padding: 40px;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, .9);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+            border-radius: 7px;
+        }
+
+        .box-admin-register {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 4;
+            text-align: center;
+            justify-self: center;
+            align-self: center;
+            width: 400px;
+            padding: 40px;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, .9);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+            border-radius: 7px;
+        }
+
+        .submit-buttom {
+            background: #F23232;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-buttom:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #F23232;
+            color: #000000;
+        }
+
+
+        .header {
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #000000;
+        }
+
+        .logo {
+            display: flex;
+            width: 45px;
+            height: 45px;
+            margin-left: 10px;
+            align-self: center;
+            margin-top: 3px;
+            margin-bottom: 7px;
+        }
+
+        .logo:hover {
+            opacity: 60%;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            margin-left: 20px;
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .logo-text:hover {
+            color: #F23232;
+        }
+
+        .drop-down-box {
+            display: flex;
+            position: relative;
+            left: 0;
+            color: #F23232;
+            font-size: 12px;
+        }
+
+        .drop-down-text {
+            position: absolute;
+            top: -18px;
+            letter-spacing: 1px;
+        }
+
+        .drop-down {
+            border: none;
+            outline: none;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #000000;
+            background-color: #FFFFFF;
+            width: 100%;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .word-kokama {
+            font-size: 16px;
+            color: #000000;
+            letter-spacing: 1px;
+            left: 0;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            padding-left: 10px;
+        }
+
+        .word-kokama:hover {
+            color: #F23232;
+        }
+
+        .word-list {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .box-title {
+            font-size: 18px;
+            color: #000000;
+            letter-spacing: 1px;
+            left: 0;
+        }
+
+        .icon {
+            color: #000000
+        }
+
+        .icon:hover {
+            color: #F23232;
+        }
+
+        .title-box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-buttom {
+            display: flex;
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            left: 0;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            padding-left: 8px;
+            padding-right: 8px;
+            text-decoration: none;
+            background-color: #F23232;
+            align-items: center;
+            border-radius: 7px;
+        }
+
+        .add-buttom:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #F23232;
+            color: #000000;
+        }
+
+        .list-word {
+            font-size: 16px;
+            color: #000000;
+            letter-spacing: 1px;
+            left: 0;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='header'>
+        <a href="/traducao/lista_de_palavras/">
+            <img alt class='logo'
+                src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+        </a>
+
+        <a class='logo-text' href="/traducao/lista_de_palavras/">Projeto Kokama</a>
+    </div>
+    <div class='box-list'>
+
+        <div class='title-box'>
+            <h1 class='box-title'>Lista de Palavras em Kokama</h1>
+            <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
+        </div>
+
+        {% for item in object %}
+        <div class='word-list'>
+
+            <a class='icon'>
+                <em class="material-icons">mode_edit</em>
             </a>
-            
-            <a class='logo-text'href="/traducao/lista_de_palavras/">Projeto Kokama</a>
+
+            <a class='word-kokama'>{{ item.word_kokama}}</a>
         </div>
-        <div class='box-list'>
-            
-            <div class='title-box'>
-                <h1 class='box-title'>Lista de Palavras em Kokama</h1>
-                <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
-            </div>
-            
-            {% for item in object %}
-                <div class='word-list'>
-
-                    <a class='icon'>
-                        <em class="material-icons">mode_edit</em>
-                    </a>
-
-                    <a class='word-kokama'>{{ item.word_kokama}}</a>
-                </div>
-            {% empty %} 
-                <div class= 'word-list'>
-                    <a class='list-word'>Não há palavras cadastradas</a>
-                </div>
-            {% endfor %}
+        {% empty %}
+        <div class='word-list'>
+            <a class='list-word'>Não há palavras cadastradas</a>
         </div>
+        {% endfor %}
+    </div>
 
-    </body>
+</body>
 
 </html>
 </div>
