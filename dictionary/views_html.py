@@ -9,7 +9,8 @@ from .forms import AddNewPhrase
 def add_translate(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
-            return render(request, 'add_translation.html')
+            form = AddNewPhrase()
+            return render(request, 'add_translation.html', {'form': form})
         elif(request.method == 'POST'):
             form = AddNewPhrase(request.POST)
 
@@ -39,12 +40,6 @@ def add_translate(request):
                 translate.save()
                 return redirect('/traducao/lista_de_palavras/')
             else:
-                print("qualquercoisa")
-                form = AddNewPhrase()
-                
-                context = {
-                    'form': form,
-                }
                 return render(request, 'add_translation.html', {'form': form})
     else:
         return HttpResponse('<h1>Você não tem autorização para visualizar esta página</h1>',
