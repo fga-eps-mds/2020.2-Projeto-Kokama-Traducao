@@ -6,3 +6,6 @@ POSTGRES_DB=postgres
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_PORT=5432
+CLOUD_NAME=claudinhoName
+API_KEY=claudinhoApi
+API_SECRET=claudinhoSecret
