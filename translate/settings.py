@@ -34,13 +34,21 @@ ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
 # Application definition
 
 INSTALLED_APPS = [
+    # Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    #'django.contrib.staticfiles',
     'rest_framework',
+
+    # External
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
+
+    # Apps
     'dictionary',
     'administration',
 ]
@@ -131,7 +139,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+if ENVIRONMENT != 'DEVELOPMENT':
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': config('CLOUD_NAME'),
+        'API_KEY': config('API_KEY'),
+        'API_SECRET': config('API_SECRET')
+    }
+
+    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 VERSION = config('VERSION', default='0.0')
 print("config: " + VERSION)
