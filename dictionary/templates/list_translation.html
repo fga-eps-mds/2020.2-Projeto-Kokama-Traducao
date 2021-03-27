@@ -2,47 +2,47 @@
 <!DOCTYPE html>
 <html xml:lang>
 
-    <head>
-        <meta charset="UTF-8" />
-        <title>Lista de Palavras Dicionário</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Palavras Dicionário</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 
-    <body>
-        <div class='header'>
-            <a href="/traducao/lista_de_palavras/">
-                <img alt class='logo' src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+<body>
+    <div class='header'>
+        <a href="/traducao/lista_de_palavras/">
+            <img alt class='logo'
+                src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
+        </a>
+
+        <a class='logo-text' href="/traducao/lista_de_palavras/">Projeto Kokama</a>
+    </div>
+    <div class='box-list'>
+
+        <div class='title-box'>
+            <h1 class='box-title'>Lista de Palavras em Kokama</h1>
+            <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
+        </div>
+
+        {% for item in object %}
+        <div class='word-list'>
+
+            <a class='icon'>
+                <em class="material-icons">mode_edit</em>
             </a>
-            
-            <a class='logo-text'href="/traducao/lista_de_palavras/">Projeto Kokama</a>
+
+            <a class='word-kokama'>{{ item.word_kokama}}</a>
         </div>
-        <div class='box-list'>
-            
-            <div class='title-box'>
-                <h1 class='box-title'>Lista de Palavras em Kokama</h1>
-                <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
-            </div>
-            
-            {% for item in object %}
-                <div class='word-list'>
-
-                    <a class='icon'>
-                        <em class="material-icons">mode_edit</em>
-                    </a>
-
-                    <a class='word-kokama'>{{ item.word_kokama}}</a>
-                </div>
-            {% empty %} 
-                <div class= 'word-list'>
-                    <a class='list-word'>Não há palavras cadastradas</a>
-                </div>
-            {% endfor %}
+        {% empty %}
+        <div class='word-list'>
+            <a class='list-word'>Não há palavras cadastradas</a>
         </div>
+        {% endfor %}
+    </div>
 
-    </body>
+</body>
 
 </html>
 </div>
