@@ -25,19 +25,19 @@
             <form action='/traducao/adicionar_palavra/' method='POST'>
                 {% csrf_token %}
 
-                {% for error in form.word_portuguese.errors %}
+                {% for error in form.portuguese_word.errors %}
                 <p style="color: red">{{ error }}</p>
                 {% endfor %}
                 <div class='input-box'>
-                    {{ form.word_portuguese }}
+                    {{ form.portuguese_word }}
                     <label>Palavra em Português:</label>
                 </div>
 
-                {% for error in form.word_kokama.errors %}
+                {% for error in form.kokama_word.errors %}
                 <p style="color: red">{{ error }}</p>
                 {% endfor %}
                 <div class='input-box'>
-                    {{ form.word_kokama }}
+                    {{ form.kokama_word }}
                     <label>Palavra em Kokama:</label>
                 </div>
 

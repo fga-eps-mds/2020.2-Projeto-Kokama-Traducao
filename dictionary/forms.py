@@ -24,13 +24,13 @@ class AddNewPhrase(forms.Form):
     )
 
    
-    word_portuguese = forms.CharField(
-        label='word_portuguese',
+    portuguese_word = forms.CharField(
+        label='portuguese_word',
         error_messages={'required': 'Preencha este campo.'}
     )
     
-    word_kokama = forms.CharField(
-        label='word_kokama',
+    kokama_word = forms.CharField(
+        label='kokama_word',
         error_messages={'required': 'Preencha este campo.'}
     )
     
