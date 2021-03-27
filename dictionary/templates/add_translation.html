@@ -5,234 +5,8 @@
     <meta charset="UTF-8" />
     <title>Cadastrar Tradução</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" type="text/css"
-        href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616550835/style.css_rovd3q.css">-->
-
-    <style>
-        body {
-            display: flex;
-            align-content: center;
-            flex-direction: column;
-        }
-
-        .input-box {
-            position: relative;
-        }
-
-        .input-box label {
-            position: absolute;
-            left: 0;
-            letter-spacing: 1px;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #000000;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        .input-box input {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #000000;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            border: none;
-            border-bottom: 1px solid #000000;
-            outline: none;
-            background: transparent;
-        }
-
-        .input-box input:focus~label,
-        .input-box input:valid~label {
-            top: -18px;
-            left: 0;
-            color: #F23232;
-            font-size: 12px;
-        }
-
-        .box-list {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 4;
-            text-align: center;
-            justify-self: center;
-            align-self: center;
-            width: 650px;
-            padding: 40px;
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, .9);
-            box-sizing: border-box;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
-            border-radius: 7px;
-        }
-
-        .box-admin-register {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 4;
-            text-align: center;
-            justify-self: center;
-            align-self: center;
-            width: 400px;
-            padding: 40px;
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, .9);
-            box-sizing: border-box;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
-            border-radius: 7px;
-        }
-
-        .submit-buttom { 
-            background: #F23232;
-            width: 100%;
-            border: 1px solid transparent;
-            outline: none;
-            color: #FFFFFF;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .submit-buttom:hover {
-            background-color: #FFFFFF;
-            border: 1px solid #F23232;
-            color: #000000;
-        }
-        
-
-        .header {
-            background-color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #000000;
-        }
-
-        .logo {
-            display: flex;
-            width: 45px;
-            height: 45px;
-            margin-left: 10px;
-            align-self: center;
-            margin-top: 3px;
-            margin-bottom: 7px;
-        }
-
-        .logo:hover {
-            opacity: 60%;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            margin-left: 20px;
-            color: #000000;
-            text-decoration: none;
-        }
-
-        .logo-text:hover {
-            color: #F23232;
-        }
-
-        .drop-down-box {
-            display: flex;
-            position: relative;
-            left: 0;
-            color: #F23232;
-            font-size: 12px;
-        }
-
-        .drop-down-text {
-            position: absolute;
-            top: -18px;
-            letter-spacing: 1px;
-        }
-
-        .drop-down-box select {
-            border: none;
-            outline: none;
-            margin-bottom: 20px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #000000;
-            background-color: #FFFFFF;
-            width: 100%;
-            font-size: 16px;
-            letter-spacing: 1px;
-        }
-
-        .word-kokama {
-            font-size: 16px;
-            color: #000000;
-            letter-spacing: 1px;
-            left: 0;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            text-decoration: none;
-            padding-left: 10px;
-        }
-
-        .word-kokama:hover {
-            color: #F23232;
-        }
-
-        .word-list {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .box-title {
-            font-size: 18px;
-            color: #000000;
-            letter-spacing: 1px;
-            left: 0;
-        }
-
-        .icon {
-            color: #000000
-        }
-
-        .icon:hover {
-            color: #F23232;
-        }
-
-        .title-box {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .add-buttom {
-            display: flex;
-            font-size: 16px;
-            font-weight: bold;
-            color: #FFFFFF;
-            letter-spacing: 1px;
-            left: 0;
-            margin-top: 3px;
-            margin-bottom: 3px;
-            padding-left: 8px;
-            padding-right: 8px;
-            text-decoration: none;
-            background-color: #F23232;
-            align-items: center;
-            border-radius: 7px;
-        }
-
-        .add-buttom:hover {
-            background-color: #FFFFFF;
-            border: 1px solid #F23232;
-            color: #000000;
-        }
-
-        .list-word {
-            font-size: 16px;
-            color: #000000;
-            letter-spacing: 1px;
-            left: 0;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            text-decoration: none;
-            padding-left: 10px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css"
+        href="https://res.cloudinary.com/da4ebtflu/raw/upload/v1616866117/style.css">
 </head>
 
 <body>
@@ -270,16 +44,11 @@
                 {% for error in form.type_pronunciation.errors %}
                 <p style="color: red">{{ error }}</p>
                 {% endfor %}
-
                 <div class='drop-down-box'>
                     <label class='drop-down-text' for="type_pronunciation">Escolha um tipo de pronúncia:</label>
                     {{ form.type_pronunciation }}
-                    <!-- <select class='drop-down' name="type_pronunciation">
-                        <option value="1">Geral</option>
-                        <option value="2">Feminino</option>
-                        <option value="3">Masculino</option>
-                    </select> -->
                 </div>
+
                 {% for error in form.phrase_portuguese.errors %}
                 <p style="color: red">{{ error }}</p>
                 {% endfor %}
@@ -287,10 +56,10 @@
                     {{ form.phrase_portuguese }}
                     <label>Frase em Português:</label>
                 </div>
+
                 {% for error in form.phrase_kokama.errors %}
                 <p style="color: red">{{ error }}</p>
                 {% endfor %}
-    
                 <div class='input-box'>
                     {{ form.phrase_kokama }}
                     <label>Frase em Kokama:</label>
