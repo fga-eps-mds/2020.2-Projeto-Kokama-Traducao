@@ -1,6 +1,5 @@
 from django import forms
 from django.core.validators import RegexValidator
-from .models import PhrasePortuguese, PhraseKokama
 
 PRONUNCIATION_CHOICES =(
     ("1", "Geral"),
@@ -8,7 +7,22 @@ PRONUNCIATION_CHOICES =(
     ("3", "Masculino"),
 )
 
-class AddNewPhrase(forms.Form):
+class AddNewWord(forms.Form):
+
+    kokama_word = forms.CharField(
+        label='kokama_word',
+        error_messages={'required': 'Preencha este campo.'}
+    )
+
+    portuguese_word = forms.CharField(
+        label='portuguese_word',
+        error_messages={'required': 'Preencha este campo.'}
+    )
+    
+    type_pronunciation = forms.ChoiceField(
+        choices = PRONUNCIATION_CHOICES,
+        label='type_pronunciation',
+    )
     
     phrase_portuguese = forms.RegexField(
         label='phrase_portuguese', 
@@ -22,22 +36,4 @@ class AddNewPhrase(forms.Form):
         regex='.*<.+>.*',
         error_messages={'invalid': ("A frase deve conter uma palavra destacada com <>. Ex: <panara>.")},
     )
-
-   
-    portuguese_word = forms.CharField(
-        label='portuguese_word',
-        error_messages={'required': 'Preencha este campo.'}
-    )
-    
-    kokama_word = forms.CharField(
-        label='kokama_word',
-        error_messages={'required': 'Preencha este campo.'}
-    )
-    
-    type_pronunciation = forms.ChoiceField(
-        choices = PRONUNCIATION_CHOICES,
-        label='type_pronunciation',
-    )
-
-
-    
+  

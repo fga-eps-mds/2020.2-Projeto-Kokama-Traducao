@@ -4,15 +4,7 @@
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-<div class='header'>
-
-  <a href="/traducao/lista_de_palavras/">
-    <img alt class='logo'
-      src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
-  </a>
-
-  <a class='logo-text' href="/traducao/lista_de_palavras/">Projeto Kokama</a>
-</div>
+{% include 'header.html' %}
 
 <div class="box-admin-register">
   <h2>Cadastrar novo Administrador</h2>
@@ -26,6 +18,16 @@
       <input name='username' type='text' required>
       <label>Nome de usuário:</label>
     </div>
+
+    {% comment %} {% for error in form.email.errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+    <div class="input-box">
+      {{ form.email }}
+      <!-- <input name='email' type='email' required> -->
+      <label>Email:</label>
+    </div> {% endcomment %}
+
     {% for error in form.password1.errors %}
     <p style="color: red">{{ error }}</p>
     {% endfor %}
@@ -33,6 +35,7 @@
       <input name='password1' type='password' required>
       <label>Senha:</label>
     </div>
+
     {% for error in form.password2.errors %}
     <p style="color: red">{{ error }}</p>
     {% endfor %}

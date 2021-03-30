@@ -3,16 +3,19 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, redirect
 from .models import WordKokama, WordPortuguese
 from .models import PhrasePortuguese, PhraseKokama, PronunciationType,Translate
-from .forms import AddNewPhrase
+from .forms import AddNewWord
 
 @require_http_methods(["GET", "POST"])
 def add_translate(request):
+    
     if(request.user.is_superuser):
+        
         if(request.method == 'GET'):
-            form = AddNewPhrase()
+            form = AddNewWord()
             return render(request, 'add_translation.html', {'form': form})
+        
         elif(request.method == 'POST'):
-            form = AddNewPhrase(request.POST)
+            form = AddNewWord(request.POST)
 
             if form.is_valid():
 
@@ -26,7 +29,8 @@ def add_translate(request):
                 wordPortuguese.save()
                 
                 pronunciationType = PronunciationType.objects.get(id=pronunciation_type)
-            
+                pronunciationType.save()
+
                 phrasePortuguese = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
                 phrasePortuguese.save()
                 
@@ -38,7 +42,8 @@ def add_translate(request):
 
                 translate = Translate(word_kokama=wordKokama, word_portuguese=wordPortuguese)
                 translate.save()
-                return redirect('/traducao/lista_de_palavras/')
+
+                return redirect('/traducao/adicionar_palavra/')
             else:
                 return render(request, 'add_translation.html', {'form': form})
     else:
@@ -50,7 +55,6 @@ def list_translation (request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
             word_kokama = WordKokama.objects.all()
-
             context = {
                 'word_kokama': word_kokama,
             }
