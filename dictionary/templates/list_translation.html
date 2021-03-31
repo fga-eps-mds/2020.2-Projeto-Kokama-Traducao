@@ -20,17 +20,37 @@
             <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
         </div>
         
+        <table border="1px", cellspacing="0" style="margin-top:30px; border: 1px solid #F23232">
+            <tr>
+                <th>Edit</th>
+                <th style="padding:15px;">Kokama</th>
+                <th>Português</th>
+                <th>Tipo de Pronúncia</th>
+                <th>Frase em Português</th>
+                <th>Frase em Kokama</th>
+            </tr>
 
+            {% for kokama, portuguese, phrase_kokama, phrase_portuguese in words %}
+            <tr>
+                <td>
+                    <a href="#">
+                        <img src="{% static 'pencil.png' %}" style="width:18px; heigth:18px;">
+                    </a>
+                </td>
+                <td style="padding:10px">{{ kokama.word_kokama }}</td>
+                <td>{{ portuguese }}</td>
+                <td>{{ kokama.pronunciation_type }}</td>
+                <td>{{ phrase_portuguese }}</td>
+                <td>{{ phrase_kokama }}</td>
+            </tr>
 
-        {% for item in object %}
-        <div class='word-list'>
-            <a href="" class='word-kokama'>{{ item.word_kokama}}</a>
-        </div>
-        {% empty %}
-        <div class='word-list'>
-            <a class='list-word'>Não há palavras cadastradas</a>
-        </div>
-        {% endfor %}
+            {% empty %}
+            <div class='word-list'>
+                <a class='list-word'>Não há palavras cadastradas</a>
+            </div>
+            {% endfor %}
+        </table>
+
     </div>
 
 </body>

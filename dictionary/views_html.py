@@ -55,10 +55,15 @@ def list_translation (request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
             word_kokama = WordKokama.objects.all()
+            word_portuguese= WordPortuguese.objects.all()
+            phrase_portuguese= PhrasePortuguese.objects.all()
+            phrase_kokama= PhraseKokama.objects.all()
+            words = zip(word_kokama, word_portuguese, phrase_portuguese,phrase_kokama)
             context = {
-                'word_kokama': word_kokama,
+                'words': words,
             }
-            return render(request, 'list_translation.html',{'object':word_kokama})
+            print(context)
+            return render(request, 'list_translation.html', context)
         else:
             return HttpResponse('<h1>Erro interno do servidor</h1>', status=500)
     else:
