@@ -20,12 +20,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Test de Cat
+        run: cat LICENSE
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.1.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
-          title: "Development Build"
+          title: "pre-release"
           files: |
             LICENSE
