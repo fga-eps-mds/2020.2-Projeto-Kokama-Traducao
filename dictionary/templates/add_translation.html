@@ -25,6 +25,16 @@
           <label>Palavra em Kokama:</label>
         </div>
 
+        {% for error in form.type_pronunciation.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        <div class="drop-down-box">
+          <label class="drop-down-text" for="type_pronunciation">
+            Escolha um tipo de pronúncia:
+          </label>
+          {{ form.type_pronunciation }}
+        </div>
+        
         {% for error in form.portuguese_word.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
@@ -35,14 +45,14 @@
             
         </div>
 
-        {% for error in form.type_pronunciation.errors %}
+
+
+        {% for error in form.phrase_kokama.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
-        <div class="drop-down-box">
-          <label class="drop-down-text" for="type_pronunciation">
-            Escolha um tipo de pronúncia:
-          </label>
-          {{ form.type_pronunciation }}
+        <div class="input-box">
+          {{ form.phrase_kokama }}
+          <label>Frase em Kokama:</label>
         </div>
 
         {% for error in form.phrase_portuguese.errors %}
@@ -51,14 +61,6 @@
         <div class="input-box">
           {{ form.phrase_portuguese }}
           <label>Frase em Português:</label>
-        </div>
-
-        {% for error in form.phrase_kokama.errors %}
-        <p style="color: red">{{ error }}</p>
-        {% endfor %}
-        <div class="input-box">
-          {{ form.phrase_kokama }}
-          <label>Frase em Kokama:</label>
         </div>
 
         <input

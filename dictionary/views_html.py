@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import WordKokama, WordPortuguese
 from .models import PhrasePortuguese, PhraseKokama, PronunciationType,Translate
 from .forms import AddNewWord
@@ -62,10 +62,24 @@ def list_translation (request):
             context = {
                 'words': words,
             }
-            print(context)
             return render(request, 'list_translation.html', context)
         else:
             return HttpResponse('<h1>Erro interno do servidor</h1>', status=500)
     else:
         return HttpResponse('<h1>Você não tem autorização para visualizar esta página</h1>',
                             status=401)
+
+def viewWord(request, id):
+   kokama = get_object_or_404(WordKokama, pk=id)
+   portuguese = get_object_or_404(WordPortuguese, pk=id)
+   phrase_kokama = get_object_or_404(PhraseKokama, pk=id)
+   phrase_portuguese = get_object_or_404(PhrasePortuguese, pk=id)
+
+   context = {
+       'kokama': kokama,
+       'portuguese': portuguese,
+       'phrase_kokama': phrase_kokama,
+       'phrase_portuguese': phrase_portuguese
+   }
+
+   return render(request, 'words/word.html', context)
