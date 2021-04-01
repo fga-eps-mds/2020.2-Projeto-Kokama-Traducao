@@ -21,7 +21,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Test de Cat
-        run: cat LICENSE
+        run: ls -a
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.1.1
         with:
