@@ -32,7 +32,7 @@ PRONUNCIATION_CHOICES =(
     ("3", "Masculino"),
 )
 
-class AddNewWord(forms.Form):
+class NewWordForm(forms.Form):
 
     kokama_word = forms.CharField(
         label='kokama_word',

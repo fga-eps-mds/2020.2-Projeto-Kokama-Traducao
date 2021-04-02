@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Palavras{% endblock %}
+
+{% block content %}
+
+    <div id='content-box'>
+
+        <div id='content-top'>
+            <h1 id='content-title'>Lista de Palavras</h1>
+            <a class='add-buttom' href="/traducao/adicionar_palavra/">Adicionar Palavras</a>
+        </div>
+
+        <div id="word-list">
+            {% for kokama, portuguese in words %}
+            <div class="word-area">
+                <span class="word"><a href="palavra/{{kokama.id}}">{{ kokama }} - {{ portuguese }}</a></span>
+                <span><i class="fas fa-trash"></i></span>
+                <span><i class="fas fa-edit"></i></span>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

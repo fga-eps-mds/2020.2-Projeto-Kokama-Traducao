@@ -1,13 +1,11 @@
-{% load static %}
+{% extends 'base_adm.html' %}
+
+{% block title %}Login de Administrador{% endblock %}
+
 {% block content %}
 
-
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-{% include 'header.html' %}
-
-<div class="box-admin-register">
-  <h2>Login</h2>
+<div id="content-box">
+  <h1 id='content-title'>Login</h1>
   <form action="/login/" method="post">
     {% csrf_token %}
 

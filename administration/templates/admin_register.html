@@ -1,13 +1,13 @@
-{% load static %}
+{% extends 'base_adm.html' %}
+
+{% block title %}Registro de Administrador{% endblock %}
+
 {% block content %}
 
+<div id="content-box">
 
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <h1 id="content-title">Cadastrar Administrador</h1>
 
-{% include 'header.html' %}
-
-<div class="box-admin-register">
-  <h2>Cadastrar novo Administrador</h2>
   <form action="/admin_register/" method="post">
     {% csrf_token %}
 
@@ -18,15 +18,6 @@
       <input name='username' type='text' required>
       <label>Nome de usuário:</label>
     </div>
-
-    {% comment %} {% for error in form.email.errors %}
-    <p style="color: red">{{ error }}</p>
-    {% endfor %}
-    <div class="input-box">
-      {{ form.email }}
-      <!-- <input name='email' type='email' required> -->
-      <label>Email:</label>
-    </div> {% endcomment %}
 
     {% for error in form.password1.errors %}
     <p style="color: red">{{ error }}</p>

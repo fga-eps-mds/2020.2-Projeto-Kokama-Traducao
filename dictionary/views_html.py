@@ -3,19 +3,19 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import WordKokama, WordPortuguese
 from .models import PhrasePortuguese, PhraseKokama, PronunciationType,Translate
-from .forms import AddNewWord
+from .forms import NewWordForm
 
 @require_http_methods(["GET", "POST"])
-def add_translate(request):
+def addWord(request):
     
     if(request.user.is_superuser):
         
         if(request.method == 'GET'):
-            form = AddNewWord()
-            return render(request, 'add_translation.html', {'form': form})
+            form = NewWordForm()
+            return render(request, 'words/word_add.html', {'form': form})
         
         elif(request.method == 'POST'):
-            form = AddNewWord(request.POST)
+            form = NewWordForm(request.POST)
 
             if form.is_valid():
 
@@ -45,24 +45,19 @@ def add_translate(request):
 
                 return redirect('/traducao/adicionar_palavra/')
             else:
-                return render(request, 'add_translation.html', {'form': form})
+                return render(request, 'words/word_add.html', {'form': form})
     else:
         return HttpResponse('<h1>Você não tem autorização para visualizar esta página</h1>',
                             status=401)
 
 @require_http_methods(["GET", "POST"])
-def list_translation (request):
+def listWords(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
-            word_kokama = WordKokama.objects.all()
-            word_portuguese= WordPortuguese.objects.all()
-            phrase_portuguese= PhrasePortuguese.objects.all()
-            phrase_kokama= PhraseKokama.objects.all()
-            words = zip(word_kokama, word_portuguese, phrase_portuguese,phrase_kokama)
-            context = {
-                'words': words,
-            }
-            return render(request, 'list_translation.html', context)
+            word_kokama = WordKokama.objects.all().order_by('-id')
+            word_portuguese= WordPortuguese.objects.all().order_by('-id')
+            words = zip(word_kokama, word_portuguese)
+            return render(request, 'words/word_list.html', {'words': words})
         else:
             return HttpResponse('<h1>Erro interno do servidor</h1>', status=500)
     else:
@@ -82,4 +77,4 @@ def viewWord(request, id):
        'phrase_portuguese': phrase_portuguese
    }
 
-   return render(request, 'words/word.html', context)
+   return render(request, 'words/word_view.html', context)

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Palavras{% endblock %}
+
+{% block content %}
+
+<div id='content-box'>
+
+  <div>
+    <h2 class="kokama-word">{{ kokama.word_kokama }}</h2>
+    <p class="portuguese-word"> {{ portuguese.word_portuguese }}</p>
+    
+    <p class="label">Tipo de Pronúncia:</p>
+    <p class="pronunciation">{{ kokama.pronunciation_type }}</p>
+    
+    <p class="label">Frase em Kokama:</p>
+    <p class="phrase">{{ phrase_kokama.phrase_kokama }}</p>
+
+    <p class="label">Frase em Português:</p>
+    <p class="phrase">{{ phrase_portuguese.phrase_portuguese }}</p>
+    <br>
+    <span><i class="fas fa-trash" style="font-size:28px;"></i></span>
+    <span><i class="fas fa-edit" style="font-size:28px;"></i></span>
+  </div>
+
+</div>
+
+{% endblock %}
+
+
+<body>
+  {% include 'header.html' %}
+
+  <div class="box-admin-register">
+
+    
+
+  </div>
+</body>
+
+</html>

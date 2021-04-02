@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html xml:lang>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/dictionary/style.css' %}">
+    <script src="https://kit.fontawesome.com/759e57a952.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+<body>
+    {% include 'header.html' %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
+
+
