@@ -144,18 +144,11 @@ body {
   color: #F23232;
 }
 
-.fas.fa-edit, .fas.fa-trash {
-  cursor: pointer;
-  margin: 10px;
-  font-size: 20px;
-  float: right;
-}
-
-.fas.fa-edit {
-  color: #13C43F;
-}
-
 .fas.fa-trash {
+  cursor: pointer;
+  font-size: 15px;
+  padding: 13px;
+  float: right;
   color: #DB1E47;
 }
 
@@ -244,30 +237,64 @@ body {
 
 /* View word */
 .kokama-word {
-  font-size: 34px;
+  font-size: 38px;
   padding: 0;
   margin: 0;
 }
 
-.portuguese-word {
+#pronunciation {
   font-size: 24px;
   padding: 0;
   margin: 0;
-  margin-bottom: 35px;
-  color: #858585;
+  color: #909090;
+}
+
+.word-content {
+  display: flex;
+  justify-content: space-between;
+  border-top: 3px solid #F23232;
+  padding: 0;
+  margin: 0;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.word-content a {
+  text-decoration: none;
 }
 
 .label {
-  font-size: 22px;
+  font-size: 23px;
   font-weight: bold;
   text-align: left;
-  padding-top: 20px;
-  border-top: 3px solid #F23232;
 }
 
-.pronunciation, .phrase {
+.add-buttom {
+  background: #f23232;
+  width: fit-content;
+  align-self: center;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.35s;
+}
+
+.add-buttom:hover {
+  background-color: #ffffff;
+  border: 1px solid #f23232;
+  color: #000000;
+}
+
+.portuguese, .phrase {
   font-size: 22px;
+  padding: 0;
+  margin: 10px 0 0 20px;
+  padding-bottom: 10px;
   text-align: left;
   margin-left: 20px;
-  padding-bottom: 5px;
 }
+
+

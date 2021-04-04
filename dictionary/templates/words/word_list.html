@@ -12,11 +12,14 @@
         </div>
 
         <div id="word-list">
-            {% for kokama, portuguese in words %}
+            {% for word in words %}
             <div class="word-area">
-                <span class="word"><a href="palavra/{{kokama.id}}">{{ kokama }} - {{ portuguese }}</a></span>
+                <span class="word"><a href="{{word.word_kokama.id}}">{{ word.word_kokama }} - {{ word.word_portuguese }}</a></span>
                 <span><i class="fas fa-trash"></i></span>
-                <span><i class="fas fa-edit"></i></span>
+            </div>
+            {% empty %}
+            <div class='word-list'>
+                <h3>Não há palavras cadastradas</h3>
             </div>
             {% endfor %}
         </div>

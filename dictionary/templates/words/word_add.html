@@ -32,29 +32,28 @@
     {% for error in form.portuguese_word.errors %}
     <p style="color: red">{{ error }}</p>
     {% endfor %}
-    <div>
-      <div class="input-box">
-        {{ form.portuguese_word }}
-        <label>Palavra em Português:</label>
-      </div>
+    <div class="input-box">
+      {{ form.portuguese_word }}
+      <label>Palavra em Português:</label>
+    </div>
 
-      {% for error in form.phrase_kokama.errors %}
-      <p style="color: red">{{ error }}</p>
-      {% endfor %}
-      <div class="input-box">
-        {{ form.phrase_kokama }}
-        <label>Frase em Kokama:</label>
-      </div>
+    {% for error in form.phrase_kokama.errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+    <div class="input-box">
+      {{ form.phrase_kokama }}
+      <label>Frase em Kokama:</label>
+    </div>
 
-      {% for error in form.phrase_portuguese.errors %}
-      <p style="color: red">{{ error }}</p>
-      {% endfor %}
-      <div class="input-box">
-        {{ form.phrase_portuguese }}
-        <label>Frase em Português:</label>
-      </div>
+    {% for error in form.phrase_portuguese.errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+    <div class="input-box">
+      {{ form.phrase_portuguese }}
+      <label>Frase em Português:</label>
+    </div>
 
-      <input class="submit-buttom" name="submit" type="submit" value="Salvar" />
+    <input class="submit-buttom" name="submit" type="submit" value="Salvar" />
   </form>
 
 </div>
