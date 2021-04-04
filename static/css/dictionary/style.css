@@ -269,25 +269,6 @@ body {
   text-align: left;
 }
 
-.add-buttom {
-  background: #f23232;
-  width: fit-content;
-  align-self: center;
-  outline: none;
-  cursor: pointer;
-  border: 1px solid transparent;
-  color: #ffffff;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: 0.35s;
-}
-
-.add-buttom:hover {
-  background-color: #ffffff;
-  border: 1px solid #f23232;
-  color: #000000;
-}
-
 .portuguese, .phrase {
   font-size: 22px;
   padding: 0;

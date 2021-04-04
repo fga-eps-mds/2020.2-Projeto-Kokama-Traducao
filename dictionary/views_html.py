@@ -2,11 +2,12 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import WordKokama, WordPortuguese
-from .models import PhrasePortuguese, PhraseKokama, PronunciationType,Translate
+from .models import PhrasePortuguese, PhraseKokama, PronunciationType, Translate
 from .forms import NewWordForm, AddNewPortugueseForm, AddNewPhraseForm
 
+
 @require_http_methods(["GET", "POST"])
-def listWords(request):
+def list_words(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
             translations = Translate.objects.all().order_by('-id')
@@ -17,7 +18,9 @@ def listWords(request):
     else:
         return redirect('/')
 
-def viewWord(request, id):
+
+@require_http_methods(["GET", "POST"])
+def view_word(request, id):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
             kokama = get_object_or_404(WordKokama, pk=id)
@@ -37,16 +40,15 @@ def viewWord(request, id):
         return redirect('/')
 
 
-
 @require_http_methods(["GET", "POST"])
-def addWord(request):
-    
+def add_word(request):
+
     if(request.user.is_superuser):
-        
+
         if(request.method == 'GET'):
             form = NewWordForm()
             return render(request, 'words/word_add.html', {'form': form})
-        
+
         else:
             form = NewWordForm(request.POST)
 
@@ -57,23 +59,23 @@ def addWord(request):
                 pronunciation_type = request.POST.get('type_pronunciation')
                 phrase_portuguese = request.POST.get('phrase_portuguese')
                 phrase_kokama = request.POST.get('phrase_kokama')
-                
-                wordPortuguese = WordPortuguese(word_portuguese=portuguese_word)
-                wordPortuguese.save()
-                
-                pronunciationType = PronunciationType.objects.get(id=pronunciation_type)
-                pronunciationType.save()
 
-                phrasePortuguese = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-                phrasePortuguese.save()
-                
-                wordKokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciationType)
-                wordKokama.save()
-    
-                phraseKokama = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=wordKokama, phrase_portuguese=phrasePortuguese)
-                phraseKokama.save()
+                portuguese = WordPortuguese(word_portuguese=portuguese_word)
+                portuguese.save()
 
-                translate = Translate(word_kokama=wordKokama, word_portuguese=wordPortuguese)
+                pronunciation = PronunciationType.objects.get(id=pronunciation_type)
+                pronunciation.save()
+
+                phrasePT = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+                phrasePT.save()
+
+                kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
+                kokama.save()
+
+                phraseKK = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrasePT)
+                phraseKK.save()
+
+                translate = Translate(word_kokama=kokama, word_portuguese=portuguese)
                 translate.save()
 
                 return redirect('/traducao/adicionar_palavra/')
@@ -83,52 +85,64 @@ def addWord(request):
         return redirect('/')
 
 
-def editWord(request, id, field):
-    if(request.user.is_superuser):
+words_edit_url = 'words/word_edit.html'
+words_list_url = '/traducao/lista_de_palavras/'
 
-        if field == "portugues":
-            if(request.method == 'GET'):
-                form = AddNewPortugueseForm()
-                return render(request, 'words/word_edit.html', {'form': form})
-            else:
-                form = AddNewPortugueseForm(request.POST)
-                if form.is_valid():
-                    portuguese_word = request.POST.get('portuguese_word')
-                    wordPortuguese = WordPortuguese(word_portuguese=portuguese_word)
-                    wordPortuguese.save()
-                    
-                    wordKokama = get_object_or_404(WordKokama, pk=id)
+@require_http_methods(["GET", "POST"])
+def edit_portuguese(request, id, field):
 
-                    translate = Translate(word_kokama=wordKokama, word_portuguese=wordPortuguese)
-                    translate.save()
+    if(request.method == 'GET'):
+        form = AddNewPortugueseForm()
+        return render(request, words_edit_url, {'form': form})
+    else:
+        form = AddNewPortugueseForm(request.POST)
+        if form.is_valid():
+            portuguese_word = request.POST.get('portuguese_word')
+            wordPortuguese = WordPortuguese(word_portuguese=portuguese_word)
+            wordPortuguese.save()
 
-                    return redirect('/traducao/lista_de_palavras/' + str(id))
-                else:
-                    return render(request, 'words/word_edit.html', {'form': form})
+            wordKokama = get_object_or_404(WordKokama, pk=id)
 
-        elif field == "frases":
-            if(request.method == 'GET'):
-                
-                form = AddNewPhraseForm()
-                return render(request, 'words/word_edit.html', {'form': form})
-            else:
-                form = AddNewPhraseForm(request.POST)
-                if form.is_valid():
-                    phrase_portuguese = request.POST.get('phrase_portuguese')
-                    phrase_kokama = request.POST.get('phrase_kokama')
+            translate = Translate(word_kokama=wordKokama,
+                                  word_portuguese=wordPortuguese)
+            translate.save()
 
-                    wordKokama = get_object_or_404(WordKokama, pk=id)
-
-                    phrasePortuguese = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-                    phrasePortuguese.save()
-                    phraseKokama = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=wordKokama, phrase_portuguese=phrasePortuguese)
-                    phraseKokama.save()
-
-                    return redirect('/traducao/lista_de_palavras/' + str(id))
-                else:
-                    return render(request, 'words/word_edit.html', {'form': form})
-
+            return redirect(words_list_url + str(id))
         else:
-            return redirect('/traducao/lista_de_palavras/' + str(id))
+            return render(request, words_edit_url, {'form': form})
+
+
+def edit_phrases(request, id, field):
+    if(request.method == 'GET'):
+
+        form = AddNewPhraseForm()
+        return render(request, words_edit_url, {'form': form})
+    else:
+        form = AddNewPhraseForm(request.POST)
+        if form.is_valid():
+            phrase_portuguese = request.POST.get('phrase_portuguese')
+            phrase_kokama = request.POST.get('phrase_kokama')
+
+            wordKokama = get_object_or_404(WordKokama, pk=id)
+
+            phrasePortuguese = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+            phrasePortuguese.save()
+            phraseKokama = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=wordKokama, phrase_portuguese=phrasePortuguese)
+            phraseKokama.save()
+
+            return redirect(words_list_url + str(id))
+        else:
+            return render(request, words_edit_url, {'form': form})
+
+
+@require_http_methods(["GET", "POST"])
+def edit_word(request, id, field):
+    if(request.user.is_superuser):
+        if field == "portugues":
+            return edit_portuguese(request, id, field)
+        elif field == "frases":
+            return edit_phrases(request, id, field)
+        else:
+            return redirect(words_list_url + str(id))     
     else:
         return redirect('/')
