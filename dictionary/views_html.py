@@ -66,14 +66,14 @@ def add_word(request):
                 pronunciation = PronunciationType.objects.get(id=pronunciation_type)
                 pronunciation.save()
 
-                phrasePT = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-                phrasePT.save()
+                phrase_PT = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+                phrase_PT.save()
 
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 kokama.save()
 
-                phraseKK = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrasePT)
-                phraseKK.save()
+                phrase_KK = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrase_PT)
+                phrase_KK.save()
 
                 translate = Translate(word_kokama=kokama, word_portuguese=portuguese)
                 translate.save()
@@ -101,9 +101,9 @@ def edit_portuguese(request, id, field):
             wordPortuguese = WordPortuguese(word_portuguese=portuguese_word)
             wordPortuguese.save()
 
-            wordKokama = get_object_or_404(WordKokama, pk=id)
+            word_kokama = get_object_or_404(WordKokama, pk=id)
 
-            translate = Translate(word_kokama=wordKokama,
+            translate = Translate(word_kokama=word_kokama,
                                   word_portuguese=wordPortuguese)
             translate.save()
 
@@ -123,12 +123,12 @@ def edit_phrases(request, id, field):
             phrase_portuguese = request.POST.get('phrase_portuguese')
             phrase_kokama = request.POST.get('phrase_kokama')
 
-            wordKokama = get_object_or_404(WordKokama, pk=id)
+            word_kokama = get_object_or_404(WordKokama, pk=id)
 
-            phrasePortuguese = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-            phrasePortuguese.save()
-            phraseKokama = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=wordKokama, phrase_portuguese=phrasePortuguese)
-            phraseKokama.save()
+            phrase_PT = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+            phrase_PT.save()
+            phrase_KK = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=word_kokama, phrase_portuguese=phrase_PT)
+            phrase_KK.save()
 
             return redirect(words_list_url + str(id))
         else:
