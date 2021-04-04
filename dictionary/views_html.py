@@ -66,14 +66,14 @@ def add_word(request):
                 pronunciation = PronunciationType.objects.get(id=pronunciation_type)
                 pronunciation.save()
 
-                phrase_PT = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-                phrase_PT.save()
+                phrase_pt = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+                phrase_pt.save()
 
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 kokama.save()
 
-                phrase_KK = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrase_PT)
-                phrase_KK.save()
+                phrase_kk = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrase_pt)
+                phrase_kk.save()
 
                 translate = Translate(word_kokama=kokama, word_portuguese=portuguese)
                 translate.save()
@@ -125,10 +125,10 @@ def edit_phrases(request, id, field):
 
             word_kokama = get_object_or_404(WordKokama, pk=id)
 
-            phrase_PT = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-            phrase_PT.save()
-            phrase_KK = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=word_kokama, phrase_portuguese=phrase_PT)
-            phrase_KK.save()
+            phrase_pt = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+            phrase_pt.save()
+            phrase_kk = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=word_kokama, phrase_portuguese=phrase_pt)
+            phrase_kk.save()
 
             return redirect(words_list_url + str(id))
         else:
