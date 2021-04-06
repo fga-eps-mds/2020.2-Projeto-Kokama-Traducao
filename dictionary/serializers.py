@@ -37,3 +37,9 @@ class WordKokamaSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordKokama
         fields = ['word_kokama', 'pronunciation_type', 'phrases', 'translations']
+
+
+class WordsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WordKokama
+        fields = ['word_kokama',]

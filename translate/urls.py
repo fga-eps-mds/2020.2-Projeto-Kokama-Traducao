@@ -17,18 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from dictionary.views import KokamaViewSet
+from dictionary.views import KokamaViewSet, WordsViewSet, PhrasesViewSet
 from administration.views import admin_register, login
 
 
 router = routers.DefaultRouter()
-router.register(r'', KokamaViewSet)
+router.register(r'dicionario', KokamaViewSet, basename="dicionario")
+router.register(r'palavras', WordsViewSet, basename="palavras")
+router.register(r'frases', PhrasesViewSet, basename="frases")
 
 urlpatterns = [
-    path('dicionario/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('traducao/', include('dictionary.urls')),
     path('admin_register/', admin_register),
     path('login/', login),
     path('', login, name ='login')
+    path('', include(router.urls)), 
 ]
