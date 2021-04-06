@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import WordKokama, WordPortuguese
+from .models import WordKokama, WordPortuguese, Translate
 from .models import PronunciationType, PhrasePortuguese, PhraseKokama
 
 
