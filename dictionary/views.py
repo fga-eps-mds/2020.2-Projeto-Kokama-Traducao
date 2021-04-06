@@ -1,6 +1,6 @@
 from rest_framework import viewsets, mixins
-from .serializers import WordKokamaSerializer, WordsSerializer
-from .models import WordKokama
+from .serializers import WordKokamaSerializer, WordsSerializer, PhraseKokamaSerializer
+from .models import WordKokama, PhraseKokama
 
 
 class KokamaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -11,3 +11,7 @@ class KokamaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 class WordsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = WordKokama.objects.all()
     serializer_class = WordsSerializer
+
+class PhrasesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = PhraseKokama.objects.all()
+    serializer_class = PhraseKokamaSerializer
