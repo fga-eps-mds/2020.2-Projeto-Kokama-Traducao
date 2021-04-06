@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Palavras{% endblock %}
+
+{% block content %}
+
+<div id='content-box'>
+
+  <h2 class="kokama-word"> {{ kokama.word_kokama }}</h2>
+  <p id="pronunciation"> {{ kokama.pronunciation_type }} </p>
+
+  <div class="word-content">
+    <h3 class="label">Português</h3>
+    <a href="editar/portugues">
+      <button class="add-buttom" type="button">Adicionar</button>
+    </a>
+  </div>
+  {% for translation in translations %}
+    <p class="portuguese"> {{ translation.word_portuguese }}</p>
+  {% endfor %}
+
+  <div class="word-content">
+    <h3 class="label">Frases:</h3>
+    <a href="editar/frases">
+      <button class="add-buttom" type="button">Adicionar</button>
+    </a>
+  </div>
+
+  {% for phrase in phrases %}
+    <p class="phrase">{{ phrase.phrase_kokama }}</p>
+    <p class="phrase">{{ phrase.phrase_portuguese }}</p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

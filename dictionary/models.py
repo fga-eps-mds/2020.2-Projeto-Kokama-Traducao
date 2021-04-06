@@ -1,12 +1,10 @@
 from django.db import models
 
-
 class WordPortuguese(models.Model):
-    word_portuguese = models.CharField(max_length= 50)
+    word_portuguese = models.CharField(max_length=50)
 
     def __str__(self):
         return self.word_portuguese
-
 
 class PronunciationType(models.Model):
     pronunciation_type = models.CharField(max_length=50)

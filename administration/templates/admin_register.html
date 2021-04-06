@@ -1,21 +1,13 @@
-{% load static %}
+{% extends 'base_adm.html' %}
+
+{% block title %}Registro de Administrador{% endblock %}
+
 {% block content %}
 
+<div id="content-box">
 
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <h1 id="content-title">Cadastrar Administrador</h1>
 
-<div class='header'>
-
-  <a href="/traducao/lista_de_palavras/">
-    <img alt class='logo'
-      src='https://github.com/fga-eps-mds/2020.2-Projeto-Kokama-Wiki/raw/main/docs/assets/img/logo.png'>
-  </a>
-
-  <a class='logo-text' href="/traducao/lista_de_palavras/">Projeto Kokama</a>
-</div>
-
-<div class="box-admin-register">
-  <h2>Cadastrar novo Administrador</h2>
   <form action="/admin_register/" method="post">
     {% csrf_token %}
 
@@ -26,6 +18,7 @@
       <input name='username' type='text' required>
       <label>Nome de usuário:</label>
     </div>
+
     {% for error in form.password1.errors %}
     <p style="color: red">{{ error }}</p>
     {% endfor %}
@@ -33,6 +26,7 @@
       <input name='password1' type='password' required>
       <label>Senha:</label>
     </div>
+
     {% for error in form.password2.errors %}
     <p style="color: red">{{ error }}</p>
     {% endfor %}
