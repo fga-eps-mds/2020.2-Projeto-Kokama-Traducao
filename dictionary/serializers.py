@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import WordKokama, WordPortuguese
+from .models import WordKokama, WordPortuguese, Translate
 from .models import PronunciationType, PhrasePortuguese, PhraseKokama
 
 
@@ -37,3 +37,9 @@ class WordKokamaSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordKokama
         fields = ['word_kokama', 'pronunciation_type', 'phrases', 'translations']
+
+
+class WordsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WordKokama
+        fields = ['word_kokama',]
