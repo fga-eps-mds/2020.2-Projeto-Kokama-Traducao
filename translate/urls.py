@@ -31,6 +31,6 @@ urlpatterns = [
     path('traducao/', include('dictionary.urls')),
     path('admin_register/', admin_register),
     path('login/', login),
-    path('', login, name ='login')
+    path('', login, name ='login'),
     path('', include(router.urls)), 
 ]
