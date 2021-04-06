@@ -27,10 +27,10 @@ router.register(r'palavras', WordsViewSet, basename="palavras")
 router.register(r'frases', PhrasesViewSet, basename="frases")
 
 urlpatterns = [
-    path('', include(router.urls)), 
     path('admin/', admin.site.urls),
     path('traducao/', include('dictionary.urls')),
     path('admin_register/', admin_register),
     path('login/', login),
     path('', login, name ='login')
+    path('', include(router.urls)), 
 ]
