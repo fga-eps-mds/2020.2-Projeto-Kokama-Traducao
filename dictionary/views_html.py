@@ -10,9 +10,15 @@ from .forms import NewWordForm, AddNewPortugueseForm, AddNewPhraseForm
 def list_words(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
-            translations = Translate.objects.all().order_by('-id')
-            # Need to remove duplicates translations.word_kokama from translations list
-            return render(request, 'words/word_list.html', {'words': translations})
+                        
+            word_kokama = WordKokama.objects.all().order_by('-id')
+            listWords = []
+            for word in word_kokama:
+                translations = Translate.objects.filter(word_kokama=word)
+                translate = ', '.join([translate.word_portuguese.word_portuguese for translate in translations])
+                listWords.append({"word_kokama":word, "translations":translate})
+
+            return render(request, 'words/word_list.html', {'words': listWords})
         else:
             return HttpResponse('<h1>Erro interno do servidor</h1>', status=500)
     else:
