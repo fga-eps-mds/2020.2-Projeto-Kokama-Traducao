@@ -152,3 +152,12 @@ def edit_word(request, id, field):
             return redirect(words_list_url + str(id))     
     else:
         return redirect('/')
+
+@require_http_methods(["GET"])
+def del_word(request, id):
+    if(request.method == 'GET'):
+        emp = WordKokama.objects.get(pk = id)
+        emp.delete()
+        return redirect('/traducao/lista_de_palavras/')
+
+    return HttpResponse('Erro ao deletar', status=500)

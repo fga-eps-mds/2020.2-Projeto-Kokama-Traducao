@@ -17,7 +17,11 @@
                 <span class="word"><a href="{{word.word_kokama.id}}">
                     {{ word.word_kokama }} - {{ word.translations }}
                 </a></span>
-                <span><em class="fas fa-trash"></em></span>
+                <span>
+                    <a href="/traducao/lista_de_palavras/{{word.word_kokama.id}}/delete/" >
+                        <em class="fas fa-trash"></em>
+                    </a>    
+                </span>
             </div>
             {% empty %}
             <div class='word-list'>
