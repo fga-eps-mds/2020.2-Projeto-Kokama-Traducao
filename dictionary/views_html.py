@@ -48,35 +48,35 @@ def view_word(request, id):
 
 @require_http_methods(["GET", "POST"])
 def add_word(request):
-
     if(request.user.is_superuser):
-
         if(request.method == 'GET'):
             form = NewWordForm()
             return render(request, 'words/word_add.html', {'form': form})
 
         else:
             form = NewWordForm(request.POST)
-
             if form.is_valid():
-
                 portuguese_word = request.POST.get('portuguese_word')
                 kokama_word = request.POST.get('kokama_word')
                 pronunciation_type = request.POST.get('type_pronunciation')
                 phrase_portuguese = request.POST.get('phrase_portuguese')
                 phrase_kokama = request.POST.get('phrase_kokama')
 
+                pronunciation = PronunciationType.objects.get(id=pronunciation_type)
+                pronunciation.save()
+                
+                kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
+                try:
+                    kokama.UniqueConstraint.save()
+                except:
+                    return redirect('/traducao/adicionar_palavra/')
+
                 portuguese = WordPortuguese(word_portuguese=portuguese_word)
                 portuguese.save()
 
-                pronunciation = PronunciationType.objects.get(id=pronunciation_type)
-                pronunciation.save()
 
                 phrase_pt = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
                 phrase_pt.save()
-
-                kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
-                kokama.save()
 
                 phrase_kk = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrase_pt)
                 phrase_kk.save()

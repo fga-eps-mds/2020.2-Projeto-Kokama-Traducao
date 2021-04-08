@@ -3,6 +3,7 @@ from .models import WordKokama, WordPortuguese
 from .models import PronunciationType, PhrasePortuguese, PhraseKokama
 
 
+
 class WordPortugueseSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordPortuguese

@@ -21,7 +21,8 @@ class PhrasePortuguese(models.Model):
 
 
 class WordKokama(models.Model):
-    word_kokama = models.CharField(max_length=50)
+    word_kokama = models.CharField(max_length=50, unique=True)
+
     pronunciation_type = models.ForeignKey(
         PronunciationType,
         on_delete=models.PROTECT,
@@ -31,7 +32,6 @@ class WordKokama(models.Model):
         through='Translate',
         through_fields=('word_kokama', 'word_portuguese'),
     )
-
     def __str__(self):
         return self.word_kokama
 
