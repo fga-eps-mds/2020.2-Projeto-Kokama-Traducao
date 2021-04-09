@@ -67,7 +67,7 @@ def add_word(request):
                 
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 try:
-                    kokama.UniqueConstraint.save()
+                    kokama.save()
                 except:
                     return redirect('/traducao/adicionar_palavra/')
 
@@ -161,3 +161,57 @@ def del_word(request, id):
         return redirect('/traducao/lista_de_palavras/')
 
     return HttpResponse('Erro ao deletar', status=500)
+
+@require_http_methods(["GET", "POST"])
+def update_word(request, id):
+    if(request.user.is_superuser):
+        if(request.method == 'GET'):
+            kokama = get_object_or_404(WordKokama, pk=id)
+            translations = Translate.objects.filter(word_kokama=kokama)
+            phrases = PhraseKokama.objects.filter(word_kokama=kokama)
+
+            form = NewWordForm(
+                initial={'kokama_word': kokama, 
+                'portuguese_word':translations[0].word_portuguese,
+                'phrase_kokama': phrases[0].phrase_kokama,
+                'phrase_portuguese': phrases[0].phrase_portuguese,
+                })
+            return render(request, 'words/word_add.html', {'form': form})
+
+        else:
+            form = NewWordForm(request.POST)
+            if form.is_valid():
+                if(request.method == 'POST'):
+                    emp = WordKokama.objects.get(pk = id)
+                    emp.delete()
+       
+                portuguese_word = request.POST.get('portuguese_word')
+                kokama_word = request.POST.get('kokama_word')
+                pronunciation_type = request.POST.get('type_pronunciation')
+                phrase_portuguese = request.POST.get('phrase_portuguese')
+                phrase_kokama = request.POST.get('phrase_kokama')
+
+                pronunciation = PronunciationType.objects.get(id=pronunciation_type)
+                pronunciation.save()
+                
+                kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
+                try:
+                    kokama.save()
+                except:
+                    return redirect('/traducao/adicionar_palavra/')
+                    
+                portuguese = WordPortuguese(word_portuguese=portuguese_word)
+                portuguese.save()
+
+
+                phrase_pt = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
+                phrase_pt.save()
+
+                phrase_kk = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrase_pt)
+                phrase_kk.save()
+
+                translate = Translate(word_kokama=kokama, word_portuguese=portuguese)
+                translate.save()
+
+    return redirect('/')
+              
