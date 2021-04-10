@@ -5,7 +5,6 @@ from .models import WordKokama, WordPortuguese
 from .models import PhrasePortuguese, PhraseKokama, PronunciationType, Translate
 from .forms import NewWordForm, AddNewPortugueseForm, AddNewPhraseForm
 
-
 @require_http_methods(["GET", "POST"])
 def list_words(request):
     if(request.user.is_superuser):
@@ -52,7 +51,6 @@ def add_word(request):
         if(request.method == 'GET'):
             form = NewWordForm()
             return render(request, 'words/word_add.html', {'form': form})
-
         else:
             form = NewWordForm(request.POST)
             if form.is_valid():
@@ -69,7 +67,7 @@ def add_word(request):
                 try:
                     kokama.save()
                 except:
-                    return redirect('/traducao/adicionar_palavra/')
+                    return render(request, 'words/word_add.html', {'form': form, 'uniqueError':"A palavra já existe"})
 
                 portuguese = WordPortuguese(word_portuguese=portuguese_word)
                 portuguese.save()
@@ -214,4 +212,3 @@ def update_word(request, id):
                 translate.save()
 
     return redirect('/')
-              

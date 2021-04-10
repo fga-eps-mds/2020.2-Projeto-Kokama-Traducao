@@ -21,8 +21,7 @@ class AddNewPhraseForm(forms.Form):
     phrase_portuguese = forms.RegexField(
         label='phrase_portuguese', 
         regex=regexRule,
-        error_messages={'invalid': ("A frase deve conter uma palavra destacada com <>. Ex: <banana>.")},
-    
+        error_messages={'invalid': ("A frase deve conter uma palavra destacada com <>. Ex: <banana>.")}, 
     )
 
 
@@ -41,10 +40,11 @@ class NewWordForm(forms.Form):
     )
 
     portuguese_word = forms.CharField(
-        label='portuguese_word',
-        error_messages={'required': fillField}
+         label='portuguese_word',
+         error_messages={'required': fillField}
     )
     
+
     type_pronunciation = forms.ChoiceField(
         choices = PRONUNCIATION_CHOICES,
         label='type_pronunciation',
@@ -62,6 +62,3 @@ class NewWordForm(forms.Form):
         error_messages={'invalid': ("A frase deve conter uma palavra destacada com <>. Ex: <banana>.")},
     
     )
-
-    
-  

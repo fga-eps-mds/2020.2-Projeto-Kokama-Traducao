@@ -10,7 +10,7 @@
 
   <form method="POST">
     {% csrf_token %}
-
+    <p style="color: red">{{ uniqueError }}</p>
     {% for error in form.kokama_word.errors %}
     <p style="color: red">{{ error }}</p>
     {% endfor %}
