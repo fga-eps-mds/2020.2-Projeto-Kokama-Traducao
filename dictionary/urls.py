@@ -7,5 +7,5 @@ urlpatterns = [
     path('lista_de_palavras/<int:id>/', views_html.view_word, name="view-word"),
     path('lista_de_palavras/<int:id>/editar/<field>', views_html.edit_word, name="edit-word"),
     path('lista_de_palavras/<int:id>/delete/', views_html.del_word, name="del-word"),
-    path('lista_de_palavras/<int:id>/update/', views_html.update_word, name="update-word"),
+    path('lista_de_palavras/<int:id>/editar/', views_html.update_word, name="update-word"),
 ]  
