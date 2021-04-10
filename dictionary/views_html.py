@@ -70,7 +70,7 @@ def add_word(request):
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 try:
                     kokama.save()
-                except BaseException as uniqueKey:
+                except IntegrityError:
                     return render(request, words_add_url, {'form': form, 'uniqueError':"A palavra já existe"})
 
                 portuguese = WordPortuguese(word_portuguese=portuguese_word)
@@ -195,7 +195,7 @@ def update_word(request, id):
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 try:
                     kokama.save()
-                except  BaseException as uniqueKey:
+                except IntegrityError:
                     return render(request, words_add_url, {'form': form, 'uniqueError':"A palavra já existe"})
                     
                 portuguese = WordPortuguese(word_portuguese=portuguese_word)
