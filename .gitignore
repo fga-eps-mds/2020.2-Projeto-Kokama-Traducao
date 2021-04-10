@@ -3,3 +3,4 @@ migrations/
 .vscode
 **.env
 db.sqlite3
+.coverage
