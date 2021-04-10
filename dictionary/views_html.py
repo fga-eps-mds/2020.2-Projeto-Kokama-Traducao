@@ -5,19 +5,23 @@ from .models import WordKokama, WordPortuguese
 from .models import PhrasePortuguese, PhraseKokama, PronunciationType, Translate
 from .forms import NewWordForm, AddNewPortugueseForm, AddNewPhraseForm
 
+words_edit_url = 'words/word_edit.html'
+words_list_url = '/traducao/lista_de_palavras/'
+words_add_url = 'words/word_add.html'
+
 @require_http_methods(["GET", "POST"])
 def list_words(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
                         
             word_kokama = WordKokama.objects.all().order_by('-id')
-            listWords = []
+            list_word = []
             for word in word_kokama:
                 translations = Translate.objects.filter(word_kokama=word)
                 translate = ', '.join([translate.word_portuguese.word_portuguese for translate in translations])
-                listWords.append({"word_kokama":word, "translations":translate})
+                list_word.append({"word_kokama":word, "translations":translate})
 
-            return render(request, 'words/word_list.html', {'words': listWords})
+            return render(request, 'words/word_list.html', {'words': list_word})
         else:
             return HttpResponse('<h1>Erro interno do servidor</h1>', status=500)
     else:
@@ -50,7 +54,7 @@ def add_word(request):
     if(request.user.is_superuser):
         if(request.method == 'GET'):
             form = NewWordForm()
-            return render(request, 'words/word_add.html', {'form': form})
+            return render(request, words_add_url, {'form': form})
         else:
             form = NewWordForm(request.POST)
             if form.is_valid():
@@ -66,8 +70,8 @@ def add_word(request):
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 try:
                     kokama.save()
-                except:
-                    return render(request, 'words/word_add.html', {'form': form, 'uniqueError':"A palavra já existe"})
+                except BaseException as uniqueKey:
+                    return render(request, words_add_url, {'form': form, 'uniqueError':"A palavra já existe"})
 
                 portuguese = WordPortuguese(word_portuguese=portuguese_word)
                 portuguese.save()
@@ -84,13 +88,9 @@ def add_word(request):
 
                 return redirect('/traducao/adicionar_palavra/')
             else:
-                return render(request, 'words/word_add.html', {'form': form})
+                return render(request, words_add_url, {'form': form})
     else:
         return redirect('/')
-
-
-words_edit_url = 'words/word_edit.html'
-words_list_url = '/traducao/lista_de_palavras/'
 
 @require_http_methods(["GET", "POST"])
 def edit_portuguese(request, id, field):
@@ -174,7 +174,7 @@ def update_word(request, id):
                 'phrase_kokama': phrases[0].phrase_kokama,
                 'phrase_portuguese': phrases[0].phrase_portuguese,
                 })
-            return render(request, 'words/word_add.html', {'form': form})
+            return render(request, words_add_url, {'form': form})
 
         else:
             form = NewWordForm(request.POST)
@@ -195,8 +195,8 @@ def update_word(request, id):
                 kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
                 try:
                     kokama.save()
-                except:
-                    return redirect('/traducao/adicionar_palavra/')
+                except  BaseException as uniqueKey:
+                    return render(request, words_add_url, {'form': form, 'uniqueError':"A palavra já existe"})
                     
                 portuguese = WordPortuguese(word_portuguese=portuguese_word)
                 portuguese.save()
