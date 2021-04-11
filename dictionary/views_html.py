@@ -182,33 +182,5 @@ def update_word(request, id):
                 if(request.method == 'POST'):
                     emp = WordKokama.objects.get(pk = id)
                     emp.delete()
-       
-                portuguese_word = request.POST.get('portuguese_word')
-                kokama_word = request.POST.get('kokama_word')
-                pronunciation_type = request.POST.get('type_pronunciation')
-                phrase_portuguese = request.POST.get('phrase_portuguese')
-                phrase_kokama = request.POST.get('phrase_kokama')
-
-                pronunciation = PronunciationType.objects.get(id=pronunciation_type)
-                pronunciation.save()
-                
-                kokama = WordKokama(word_kokama=kokama_word, pronunciation_type=pronunciation)
-                try:
-                    kokama.save()
-                except IntegrityError:
-                    return render(request, words_add_url, {'form': form, 'uniqueError':"A palavra já existe"})
-                    
-                portuguese = WordPortuguese(word_portuguese=portuguese_word)
-                portuguese.save()
-
-
-                phrase_pt = PhrasePortuguese(phrase_portuguese=phrase_portuguese)
-                phrase_pt.save()
-
-                phrase_kk = PhraseKokama(phrase_kokama=phrase_kokama, word_kokama=kokama, phrase_portuguese=phrase_pt)
-                phrase_kk.save()
-
-                translate = Translate(word_kokama=kokama, word_portuguese=portuguese)
-                translate.save()
 
     return redirect('/')
