@@ -43,3 +43,10 @@ class WordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordKokama
         fields = ['word_kokama',]
+
+class WordListSerializer(serializers.ModelSerializer):
+    translations = serializers.SlugRelatedField(many=True, read_only=True, slug_field='word_portuguese')
+
+    class Meta:
+        model = WordKokama
+        fields = ['id', 'word_kokama', 'translations']

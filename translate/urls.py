@@ -17,18 +17,19 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from dictionary.views import KokamaViewSet, WordsViewSet, PhrasesViewSet
+from dictionary.views import KokamaViewSet, PhrasesViewSet, WordListViewSet, add_translate
 from administration.views import admin_register, login
 
 
 router = routers.DefaultRouter()
 router.register(r'dicionario', KokamaViewSet, basename="dicionario")
-router.register(r'palavras', WordsViewSet, basename="palavras")
 router.register(r'frases', PhrasesViewSet, basename="frases")
+router.register(r'traducao/lista_de_palavras', WordListViewSet, basename="wordlist")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('traducao/', include('dictionary.urls')),
+    path('adicionar_traducao/', add_translate, name="add_translate"),
+    # path('adicionar_traducao/<int:id>/', add_translate),
     path('admin_register/', admin_register),
     path('login/', login),
     path('', login, name ='login'),

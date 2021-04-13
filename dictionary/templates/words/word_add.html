@@ -9,7 +9,7 @@
   <h1 id='content-title'>Adicionar Palavra</h1>
 
   <form action="/traducao/adicionar_palavra/" method="POST">
-    {% csrf_token %}
+    {% comment %} {% csrf_token %} {% endcomment %}
 
     {% for error in form.kokama_word.errors %}
     <p style="color: red">{{ error }}</p>
