@@ -24,7 +24,7 @@ def test(request):
 
 @api_view(["POST"])
 def add_translate(request):
-    print("socorro\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    # print("socorro\n\n\n\n\n\n\n\n\n\n\n\n\n")
     id = None
     word_kokama = WordKokama.objects.none()
     # Edit
@@ -33,20 +33,20 @@ def add_translate(request):
         word_kokama.word_kokama = word_kokama=request.POST.get('word_kokama')
         word_kokama.pronunciation_type = request.POST.get('pronunciation_choises')
     else:
-        print(1)
-        print(request.POST)
-        print(request.POST.get('word_kokama'))
-        print(request.POST.get('pronunciation_choises'))
+        # print(1)
+        # print(request.POST)
+        # print(request.POST.get('word_kokama'))
+        # print(request.POST.get('pronunciation_choises'))
         word_kokama, created = WordKokama.objects.get_or_create(
             word_kokama=request.POST.get('word_kokama'),
             pronunciation_type=PronunciationType.objects.get(
                 id=request.POST.get('pronunciation_choises')
             ),
         )
-    print(2)
+    # print(2)
 
     word_kokama.save()
-    print(3)
+    # print(3)
 
     word_portuguese_total_forms = request.POST.get('word-portuguese-TOTAL_FORMS')
     for i in range(0, int(word_portuguese_total_forms)):

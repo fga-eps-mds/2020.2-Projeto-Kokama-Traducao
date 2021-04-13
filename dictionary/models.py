@@ -24,7 +24,8 @@ class WordKokama(models.Model):
     word_kokama = models.CharField(max_length=50)
     pronunciation_type = models.ForeignKey(
         PronunciationType,
-        on_delete=models.PROTECT
+        on_delete=models.DO_NOTHING,
+        db_constraint=False
     )
     translations = models.ManyToManyField(
         WordPortuguese,
@@ -41,11 +42,13 @@ class PhraseKokama(models.Model):
     word_kokama = models.ForeignKey(
         WordKokama,
         related_name='phrases',
-        on_delete= models.PROTECT
+        on_delete= models.DO_NOTHING,
+        db_constraint=False
     )
     phrase_portuguese = models.ForeignKey(
         PhrasePortuguese, 
-        on_delete= models.PROTECT
+        on_delete= models.DO_NOTHING,
+        db_constraint=False
     )
 
     def __str__(self):
@@ -56,11 +59,11 @@ class PhraseKokama(models.Model):
 class Translate(models.Model):
     word_kokama = models.ForeignKey(
         WordKokama,
-        on_delete= models.PROTECT,
+        on_delete= models.CASCADE,
     )
     word_portuguese = models.ForeignKey(
         WordPortuguese,
-        on_delete= models.PROTECT
+        on_delete= models.CASCADE,
     )
 
     def __str__(self):
