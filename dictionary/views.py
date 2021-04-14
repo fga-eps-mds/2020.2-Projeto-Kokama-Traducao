@@ -6,8 +6,24 @@ from rest_framework.decorators import api_view
 from rest_framework.status import (
     HTTP_500_INTERNAL_SERVER_ERROR,
     HTTP_400_BAD_REQUEST,
-    HTTP_200_OK
+    HTTP_200_OK,
+    HTTP_204_NO_CONTENT
 )
+
+def delete_word_kokama(word_kokama):
+    translates = Translate.objects.filter(word_kokama=word_kokama)
+
+    for translate in translates:
+        translate.word_portuguese.delete()
+    
+    pharses_kokama = PhraseKokama.objects.filter(word_kokama=word_kokama)
+
+    for pharse_kokama in pharses_kokama:
+        pharse_kokama.phrase_portuguese.delete()
+
+    word_kokama.delete()
+
+
 
 class KokamaViewSet(viewsets.ModelViewSet):
     queryset = WordKokama.objects.all()
@@ -16,6 +32,15 @@ class KokamaViewSet(viewsets.ModelViewSet):
 class WordListViewSet(viewsets.ModelViewSet):
     queryset = WordKokama.objects.all()
     serializer_class = WordListSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            word_kokama = self.get_object()
+            delete_word_kokama(word_kokama)
+        except:
+            return Response(status=HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(status=HTTP_204_NO_CONTENT)
+
 
 class PhrasesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = PhraseKokama.objects.all()
@@ -33,7 +58,7 @@ def add_translate(request, id):
                 status=HTTP_400_BAD_REQUEST,
             )
 
-        word_kokama.delete()
+        delete_word_kokama(word_kokama)
     
     word_kokama, created = WordKokama.objects.get_or_create(
         word_kokama=request.POST.get('word_kokama'),
