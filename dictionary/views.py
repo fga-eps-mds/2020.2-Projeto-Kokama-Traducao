@@ -1,8 +1,6 @@
 from rest_framework import viewsets, mixins
-from .serializers import WordKokamaSerializer, WordsSerializer, PhraseKokamaSerializer, WordListSerializer
+from .serializers import WordKokamaSerializer, PhraseKokamaSerializer, WordListSerializer
 from .models import WordKokama, WordPortuguese, PhraseKokama, PhrasePortuguese, Translate, PronunciationType
-from django.views.decorators.http import require_http_methods
-from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.status import (
@@ -35,21 +33,7 @@ def add_translate(request, id):
                 status=HTTP_400_BAD_REQUEST,
             )
 
-        # for translate in Translate.objects.filter(word_kokama=word_kokama):
-        #     if not Translate.objects.filter(word_portuguese=translate.word_portuguese).exclude(word_kokama=word_kokama):
-        #         translate.delete()
-
         word_kokama.delete()
-
-        # if word_kokama.word_kokama == request.POST.get('word_kokama'):
-        #     word_kokama.pronunciation_type = PronunciationType.objects.get(
-        #         id=request.POST.get('pronunciation_choises')
-        #     )
-        #     for translate in word_kokama.translations:
-        #         translate.delete()
-
-        # word_kokama.word_kokama = request.POST.get('word_kokama')
-        # word_kokama.pronunciation_type = request.POST.get('pronunciation_choises')
     
     word_kokama, created = WordKokama.objects.get_or_create(
         word_kokama=request.POST.get('word_kokama'),
