@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include
+from django.conf.urls import include, url
 from rest_framework import routers
 from dictionary.views import KokamaViewSet, PhrasesViewSet, WordListViewSet, add_translate
 from administration.views import admin_register, login
@@ -28,8 +28,7 @@ router.register(r'traducao/lista_de_palavras', WordListViewSet, basename="wordli
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('adicionar_traducao/', add_translate, name="add_translate"),
-    # path('adicionar_traducao/<int:id>/', add_translate),
+    url(r'^adicionar_traducao/(?P<id>[0-9]*)$', add_translate, name="add_translate"),
     path('admin_register/', admin_register),
     path('login/', login),
     path('', login, name ='login'),

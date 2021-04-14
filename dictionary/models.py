@@ -42,13 +42,11 @@ class PhraseKokama(models.Model):
     word_kokama = models.ForeignKey(
         WordKokama,
         related_name='phrases',
-        on_delete= models.DO_NOTHING,
-        db_constraint=False
+        on_delete= models.CASCADE,
     )
     phrase_portuguese = models.ForeignKey(
         PhrasePortuguese, 
-        on_delete= models.DO_NOTHING,
-        db_constraint=False
+        on_delete= models.CASCADE,
     )
 
     def __str__(self):
