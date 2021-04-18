@@ -37,7 +37,7 @@ class WordListViewSet(viewsets.ModelViewSet):
         try:
             word_kokama = self.get_object()
             delete_word_kokama(word_kokama)
-        except:
+        except Exception:
             return Response(status=HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(status=HTTP_204_NO_CONTENT)
 
@@ -48,8 +48,6 @@ class PhrasesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 @api_view(["POST"])
 def add_translate(request, id):
-    word_kokama = WordKokama.objects.none()
-    # Edit
     if id:
         word_kokama = WordKokama.objects.get(id=id) # Conferir se existe (try)
         if word_kokama.word_kokama != request.POST.get('word_kokama') and WordKokama.objects.filter(word_kokama=request.POST.get('word_kokama')).first():
