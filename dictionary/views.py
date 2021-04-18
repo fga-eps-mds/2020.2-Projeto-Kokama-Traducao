@@ -30,7 +30,7 @@ class KokamaViewSet(viewsets.ModelViewSet):
     serializer_class = WordKokamaSerializer
 
 class WordListViewSet(viewsets.ModelViewSet):
-    queryset = WordKokama.objects.all()
+    queryset = WordKokama.objects.all().order_by('-id')
     serializer_class = WordListSerializer
 
     def destroy(self, request, *args, **kwargs):
