@@ -89,5 +89,12 @@
         "fields": {
             "word_portuguese": "nós"
         }
+    },
+    {
+        "model": "dictionary.wordportuguese",
+        "pk": 14,
+        "fields": {
+            "word_portuguese": "nós"
+        }
     }
 ]

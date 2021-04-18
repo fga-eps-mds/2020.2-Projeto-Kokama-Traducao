@@ -3,24 +3,6 @@ from .models import WordKokama, WordPortuguese
 from .models import PronunciationType, PhrasePortuguese, PhraseKokama
 
 
-class WordPortugueseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WordPortuguese
-        fields = ['word_portuguese']
-
-
-class PronunciationTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PronunciationType
-        fields = ['pronunciation_type']
-
-
-class PhrasePortugueseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PhrasePortuguese
-        fields = ['phrase_portuguese']
-
-
 class PhraseKokamaSerializer(serializers.ModelSerializer):
     phrase_portuguese = serializers.SlugRelatedField(read_only=True, slug_field='phrase_portuguese')
 
@@ -36,10 +18,12 @@ class WordKokamaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WordKokama
-        fields = ['word_kokama', 'pronunciation_type', 'phrases', 'translations']
+        fields = ['id', 'word_kokama', 'pronunciation_type', 'phrases', 'translations']
 
 
-class WordsSerializer(serializers.ModelSerializer):
+class WordListSerializer(serializers.ModelSerializer):
+    translations = serializers.SlugRelatedField(many=True, read_only=True, slug_field='word_portuguese')
+
     class Meta:
         model = WordKokama
-        fields = ['word_kokama',]
+        fields = ['id', 'word_kokama', 'translations']
