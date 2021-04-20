@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
+from django.views.decorators.http import require_http_methods
 from rest_framework.status import (
     HTTP_500_INTERNAL_SERVER_ERROR,
     HTTP_400_BAD_REQUEST,
@@ -8,7 +9,7 @@ from rest_framework.status import (
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-
+@require_http_methods(["GET"])
 @api_view(["POST"])
 def login(request):
     username = request.POST.get('username')
