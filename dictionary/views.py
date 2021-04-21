@@ -24,12 +24,19 @@ def delete_word_kokama(word_kokama):
     word_kokama.delete()
 
 
+from rest_framework.permissions import IsAdminUser
+class IsSuperUser(IsAdminUser):
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_superuser)
+
 
 class KokamaViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsSuperUser,)
     queryset = WordKokama.objects.all()
     serializer_class = WordKokamaSerializer
 
 class WordListViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsSuperUser,)
     queryset = WordKokama.objects.all().order_by('-id')
     serializer_class = WordListSerializer
 
@@ -43,6 +50,7 @@ class WordListViewSet(viewsets.ModelViewSet):
 
 
 class PhrasesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    permission_classes = (IsSuperUser,)
     queryset = PhraseKokama.objects.all()
     serializer_class = PhraseKokamaSerializer
 
