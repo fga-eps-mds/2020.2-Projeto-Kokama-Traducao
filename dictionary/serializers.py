@@ -8,7 +8,7 @@ class PhraseKokamaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PhraseKokama
-        fields = ['phrase_kokama', 'phrase_portuguese']
+        fields = ['id', 'phrase_kokama', 'phrase_portuguese']
 
 
 class WordKokamaSerializer(serializers.ModelSerializer):

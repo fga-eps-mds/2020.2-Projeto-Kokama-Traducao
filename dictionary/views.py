@@ -1,6 +1,8 @@
 from .serializers import WordKokamaSerializer, PhraseKokamaSerializer, WordListSerializer
 from .models import WordKokama, WordPortuguese, PhraseKokama, PhrasePortuguese, Translate, PronunciationType
 from django.views.decorators.http import require_http_methods
+from django.http import HttpResponse
+from decouple import config
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -16,17 +18,18 @@ from rest_framework.status import (
 
 @require_http_methods(['GET', 'POST', 'PUT', 'DELETE'])
 def authenticate(request):
-    print('Autenticando..')
-    if request.user and request.user.is_superuser:
-        print('Tu é super')
-        user_ip = str(request.META['REMOTE_ADDR'])
-        print(user_ip)
-        if user_ip in config('ALLOWED_IP_LIST'):
-            print('Seu IP tá na lista, entra aí')
-            return Response(HTTP_200_OK)
+    user_ip = str(request.META['REMOTE_ADDR'])
+    if user_ip in config('ALLOWED_IP_LIST'):
+        return Response(HTTP_200_OK)
+    else:
+        return Response(status=HTTP_401_UNAUTHORIZED)
 
-    print('Sai daqui')
-    return Response(status=HTTP_401_UNAUTHORIZED)
+
+
+
+class KokamaViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = WordKokama.objects.all()
+    serializer_class = WordKokamaSerializer
 
 
 def delete_word_kokama(word_kokama):
@@ -40,29 +43,35 @@ def delete_word_kokama(word_kokama):
 
     word_kokama.delete()
 
-
-
-class KokamaViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = WordKokama.objects.all()
-    serializer_class = WordKokamaSerializer
-
-
-class WordListViewSet(viewsets.ModelViewSet):
+class WordListViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WordKokama.objects.all().order_by('-id')
     serializer_class = WordListSerializer
 
+    def update(self, request, *args, **kwargs):
+        return Response(HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request, *args, **kwargs):
+        return Response(HTTP_400_BAD_REQUEST)
+    
     def destroy(self, request, *args, **kwargs):
+        if authenticate(request).status_code == HTTP_401_UNAUTHORIZED:
+            return HttpResponse(
+                'Você não tem autorização',
+                status=HTTP_403_FORBIDDEN,
+            )
         try:
             word_kokama = self.get_object()
             delete_word_kokama(word_kokama)
         except Exception:
             return Response(status=HTTP_500_INTERNAL_SERVER_ERROR)
+
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-class PhrasesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class PhrasesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PhraseKokama.objects.all()
     serializer_class = PhraseKokamaSerializer
+
 
 @api_view(["POST"])
 def add_translate(request, id):
