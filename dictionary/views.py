@@ -1,23 +1,40 @@
-from rest_framework import viewsets, mixins
 from .serializers import WordKokamaSerializer, PhraseKokamaSerializer, WordListSerializer
 from .models import WordKokama, WordPortuguese, PhraseKokama, PhrasePortuguese, Translate, PronunciationType
+from django.views.decorators.http import require_http_methods
+from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.status import (
     HTTP_500_INTERNAL_SERVER_ERROR,
     HTTP_400_BAD_REQUEST,
+    HTTP_401_UNAUTHORIZED,
+    HTTP_403_FORBIDDEN,
     HTTP_200_OK,
     HTTP_204_NO_CONTENT
 )
 
+
+@require_http_methods(['GET', 'POST', 'PUT', 'DELETE'])
+def authenticate(request):
+    print('Autenticando..')
+    if request.user and request.user.is_superuser:
+        print('Tu é super')
+        user_ip = str(request.META['REMOTE_ADDR'])
+        print(user_ip)
+        if user_ip in config('ALLOWED_IP_LIST'):
+            print('Seu IP tá na lista, entra aí')
+            return Response(HTTP_200_OK)
+
+    print('Sai daqui')
+    return Response(status=HTTP_401_UNAUTHORIZED)
+
+
 def delete_word_kokama(word_kokama):
     translates = Translate.objects.filter(word_kokama=word_kokama)
-
     for translate in translates:
         translate.word_portuguese.delete()
     
     pharses_kokama = PhraseKokama.objects.filter(word_kokama=word_kokama)
-
     for pharse_kokama in pharses_kokama:
         pharse_kokama.phrase_portuguese.delete()
 
@@ -25,9 +42,10 @@ def delete_word_kokama(word_kokama):
 
 
 
-class KokamaViewSet(viewsets.ModelViewSet):
+class KokamaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WordKokama.objects.all()
     serializer_class = WordKokamaSerializer
+
 
 class WordListViewSet(viewsets.ModelViewSet):
     queryset = WordKokama.objects.all().order_by('-id')
