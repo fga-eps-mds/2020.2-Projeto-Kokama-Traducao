@@ -3,7 +3,7 @@ from .models import WordKokama, WordPortuguese, PhraseKokama, PhrasePortuguese, 
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from decouple import config
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.status import (
@@ -25,8 +25,6 @@ def authenticate(request):
         return Response(status=HTTP_401_UNAUTHORIZED)
 
 
-
-
 class KokamaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WordKokama.objects.all()
     serializer_class = WordKokamaSerializer
@@ -46,12 +44,6 @@ def delete_word_kokama(word_kokama):
 class WordListViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WordKokama.objects.all().order_by('-id')
     serializer_class = WordListSerializer
-
-    def update(self, request, *args, **kwargs):
-        return Response(HTTP_400_BAD_REQUEST)
-
-    def partial_update(self, request, *args, **kwargs):
-        return Response(HTTP_400_BAD_REQUEST)
     
     def destroy(self, request, *args, **kwargs):
         if authenticate(request).status_code == HTTP_401_UNAUTHORIZED:
@@ -75,8 +67,13 @@ class PhrasesViewSet(viewsets.ReadOnlyModelViewSet):
 
 @api_view(["POST"])
 def add_translate(request, id):
+    if authenticate(request).status_code == HTTP_401_UNAUTHORIZED:
+        return HttpResponse(
+            'Você não tem autorização',
+            status=HTTP_403_FORBIDDEN,
+        )
     if id:
-        word_kokama = WordKokama.objects.get(id=id) # Conferir se existe (try)
+        word_kokama = WordKokama.objects.get(id=id)
         if word_kokama.word_kokama != request.POST.get('word_kokama') and WordKokama.objects.filter(word_kokama=request.POST.get('word_kokama')).first():
             return Response(
                 {'error': 'Palavra Kokama já cadastrada.'},
