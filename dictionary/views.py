@@ -18,7 +18,7 @@ from rest_framework.status import (
 
 @require_http_methods(['GET', 'POST', 'PUT', 'DELETE'])
 def authenticate(request):
-    user_ip = str(request.META['REMOTE_ADDR'])
+    user_ip = request.META['REMOTE_ADDR']
     if user_ip in config('ALLOWED_IP_LIST'):
         return Response(HTTP_200_OK)
     else:
