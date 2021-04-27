@@ -46,7 +46,7 @@ class WordListViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = WordListSerializer
     
     def destroy(self, request, *args, **kwargs):
-        if authenticate(request).status_code == HTTP_401_UNAUTHORIZED:
+        if authenticate(request).status_code != HTTP_200_OK:
             return HttpResponse(
                 'Você não tem autorização',
                 status=HTTP_403_FORBIDDEN,
@@ -67,7 +67,7 @@ class PhrasesViewSet(viewsets.ReadOnlyModelViewSet):
 
 @api_view(["POST"])
 def add_translate(request, id):
-    if authenticate(request).status_code == HTTP_401_UNAUTHORIZED:
+    if authenticate(request).status_code != HTTP_200_OK:
         return HttpResponse(
             'Você não tem autorização',
             status=HTTP_403_FORBIDDEN,
