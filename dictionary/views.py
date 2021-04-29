@@ -16,13 +16,12 @@ from rest_framework.status import (
 )
 
 
-@require_http_methods(['GET', 'POST', 'PUT', 'DELETE'])
-def authenticate(request):
-    user_ip = request.META['REMOTE_ADDR']
+def authenticate(user_ip):
+    print(user_ip)
     if user_ip in config('ALLOWED_IP_LIST'):
-        return Response(HTTP_200_OK)
+        return True
     else:
-        return Response(status=HTTP_401_UNAUTHORIZED)
+        return False
 
 
 class KokamaViewSet(viewsets.ReadOnlyModelViewSet):
@@ -46,7 +45,8 @@ class WordListViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = WordListSerializer
     
     def destroy(self, request, *args, **kwargs):
-        if authenticate(request).status_code != HTTP_200_OK:
+        ip = request.META['REMOTE_ADDR']
+        if not authenticate(ip):
             return HttpResponse(
                 'Você não tem autorização',
                 status=HTTP_403_FORBIDDEN,
@@ -67,7 +67,8 @@ class PhrasesViewSet(viewsets.ReadOnlyModelViewSet):
 
 @api_view(["POST"])
 def add_translate(request, id):
-    if authenticate(request).status_code != HTTP_200_OK:
+    ip = request.META['REMOTE_ADDR']
+    if not authenticate(ip):
         return HttpResponse(
             'Você não tem autorização',
             status=HTTP_403_FORBIDDEN,
