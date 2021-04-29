@@ -9,4 +9,4 @@ POSTGRES_PORT=5432
 CLOUD_NAME=claudinhoName
 API_KEY=claudinhoApi
 API_SECRET=claudinhoSecret
-ALLOWED_IP_LIST = [ListaIPsDocker]
+ALLOWED_IP_LIST = ['IP_2']

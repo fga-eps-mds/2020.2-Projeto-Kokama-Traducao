@@ -17,7 +17,6 @@ from rest_framework.status import (
 
 
 def authenticate(user_ip):
-    print(user_ip)
     if user_ip in config('ALLOWED_IP_LIST'):
         return True
     else:
