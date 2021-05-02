@@ -1,55 +1,79 @@
-from rest_framework import viewsets, mixins
 from .serializers import WordKokamaSerializer, PhraseKokamaSerializer, WordListSerializer
 from .models import WordKokama, WordPortuguese, PhraseKokama, PhrasePortuguese, Translate, PronunciationType
+from django.views.decorators.http import require_http_methods
+from django.http import HttpResponse
+from decouple import config
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.status import (
     HTTP_500_INTERNAL_SERVER_ERROR,
     HTTP_400_BAD_REQUEST,
+    HTTP_401_UNAUTHORIZED,
+    HTTP_403_FORBIDDEN,
     HTTP_200_OK,
     HTTP_204_NO_CONTENT
 )
 
+
+def authenticate(user_ip):
+    if user_ip in config('ALLOWED_IP_LIST'):
+        return True
+    else:
+        return False
+
+
+class KokamaViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = WordKokama.objects.all()
+    serializer_class = WordKokamaSerializer
+
+
 def delete_word_kokama(word_kokama):
     translates = Translate.objects.filter(word_kokama=word_kokama)
-
     for translate in translates:
         translate.word_portuguese.delete()
     
     pharses_kokama = PhraseKokama.objects.filter(word_kokama=word_kokama)
-
     for pharse_kokama in pharses_kokama:
         pharse_kokama.phrase_portuguese.delete()
 
     word_kokama.delete()
 
-
-
-class KokamaViewSet(viewsets.ModelViewSet):
-    queryset = WordKokama.objects.all()
-    serializer_class = WordKokamaSerializer
-
-class WordListViewSet(viewsets.ModelViewSet):
+class WordListViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WordKokama.objects.all().order_by('-id')
     serializer_class = WordListSerializer
-
+    
     def destroy(self, request, *args, **kwargs):
+        ip = request.META['REMOTE_ADDR']
+        if not authenticate(ip):
+            return HttpResponse(
+                'Você não tem autorização',
+                status=HTTP_403_FORBIDDEN,
+            )
         try:
             word_kokama = self.get_object()
             delete_word_kokama(word_kokama)
         except Exception:
             return Response(status=HTTP_500_INTERNAL_SERVER_ERROR)
+
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-class PhrasesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class PhrasesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PhraseKokama.objects.all()
     serializer_class = PhraseKokamaSerializer
 
+
 @api_view(["POST"])
 def add_translate(request, id):
+    ip = request.META['REMOTE_ADDR']
+    if not authenticate(ip):
+        return HttpResponse(
+            'Você não tem autorização',
+            status=HTTP_403_FORBIDDEN,
+        )
     if id:
-        word_kokama = WordKokama.objects.get(id=id) # Conferir se existe (try)
+        word_kokama = WordKokama.objects.get(id=id)
         if word_kokama.word_kokama != request.POST.get('word_kokama') and WordKokama.objects.filter(word_kokama=request.POST.get('word_kokama')).first():
             return Response(
                 {'error': 'Palavra Kokama já cadastrada.'},
