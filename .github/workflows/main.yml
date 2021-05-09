@@ -20,8 +20,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%d-%m-%Y')"
       - name: Get SonarCloud Metrics
-        run: wget https://sonarcloud.io/api/measures/component_tree?component=fga-eps-mds_2020.2-Projeto-Kokama-Traducao&metricKeys=files,functions,complexity,coverage,ncloc,comment_lines_density,duplicated_lines_density,security_rating,tests,test_success_density,test_execution_time,reliability_rating&ps=500 -O fga-eps-mds-2020_2-Projeto-Kokama-Traducao-"${{date("d-m-Y")}}".json
+        run: wget https://sonarcloud.io/api/measures/component_tree\?component\=fga-eps-mds_2020.2-Projeto-Kokama-Traducao\&metricKeys\=files,functions,complexity,coverage,ncloc,comment_lines_density,duplicated_lines_density,security_rating,tests,test_success_density,test_execution_time,reliability_rating\&ps\=500 -O fga-eps-mds-2020_2-Projeto-Kokama-Traducao-${{ steps.date.outputs.date }}.json
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.1.1
         with:
@@ -30,4 +33,4 @@ jobs:
           prerelease: true
           title: "pre-release"
           files: |
-            fga-eps-mds-2020_2-Projeto-Kokama-Traducao-"${{date("d-m-Y")}}".json
+            fga-eps-mds-2020_2-Projeto-Kokama-Traducao-${{ steps.date.outputs.date }}.json 
