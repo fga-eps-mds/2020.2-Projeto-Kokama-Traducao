@@ -143,3 +143,64 @@ class DictionaryConfigTest(TestCase):
     def test_apps(self):
         self.assertEqual(DictionaryConfig.name, 'dictionary')
         self.assertEqual(apps.get_app_config('dictionary').name, 'dictionary')
+
+
+# Views
+
+class AuthenticateTest(TestCase):
+
+    def test_authenticate(self):
+        user_ip_correct = config('ALLOWED_IP_LIST')[0]
+        result = authenticate(user_ip_correct)
+        self.assertTrue(result)
+
+        user_ip_wrong = 'wrong_ip'
+        result = authenticate(user_ip_wrong)
+        self.assertFalse(result)
+
+
+class DeleteWordKokama(TestCase):
+
+    def setUp(self):
+        # Create WordKokama
+        pronunciation = PronunciationType.objects.create(pronunciation_type=PRONUNCIATION_TYPE)
+        kokama_word = WordKokama.objects.create(
+            word_kokama=KOKAMA_WORD,
+            pronunciation_type=pronunciation
+        )
+        # Create PhrasePortuguese
+        portuguese_phrase = PhrasePortuguese.objects.create(phrase_portuguese=PORTUGUESE_PHRASE)
+        # Create PhraseKokama
+        PhraseKokama.objects.create(
+            phrase_kokama=KOKAMA_PHRASE,
+            word_kokama=kokama_word,
+            phrase_portuguese=portuguese_phrase,
+        )
+        # Create WordPortuguese
+        portuguese_word = WordPortuguese.objects.create(word_portuguese=PORTUGUESE_WORD)
+        # Create Translate
+        Translate.objects.create(
+            word_portuguese=portuguese_word,
+            word_kokama=kokama_word,
+        )
+        kokama_word.translations.add(portuguese_word)
+
+    def test_delete_word_kokama(self):
+        kokama_word = WordKokama.objects.get(word_kokama=KOKAMA_WORD)
+        delete_word_kokama(kokama_word)
+        self.assertFalse(WordKokama.objects.filter(word_kokama=str(kokama_word)).exists())
+
+
+class WordListViewSetTest(TestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.request_wrong = self.factory.delete('/1/')
+        self.request_correct = self.factory.delete('/1/', REMOTE_ADDR=config('ALLOWED_IP_LIST'))
+
+    def test_destroy(self):
+        response = WordListViewSet.destroy(WordListViewSet, self.request_wrong)
+        self.assertEqual(response.status_code, 403)
+
+        response = WordListViewSet.destroy(WordListViewSet, self.request_correct)
+        self.assertEqual(response.status_code, 500)
