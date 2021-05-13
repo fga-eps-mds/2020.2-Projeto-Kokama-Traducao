@@ -2,7 +2,7 @@ from django.test import TestCase, RequestFactory
 from dictionary.models import WordPortuguese, PronunciationType, PhrasePortuguese, WordKokama, Translate, PhraseKokama
 from django.apps import apps
 from .apps import DictionaryConfig
-from .views import authenticate, delete_word_kokama, WordListViewSet
+from .views import add_translate, authenticate, delete_word_kokama, WordListViewSet
 from decouple import config
 
 
@@ -204,3 +204,60 @@ class WordListViewSetTest(TestCase):
 
         response = WordListViewSet.destroy(WordListViewSet, self.request_correct)
         self.assertEqual(response.status_code, 500)
+
+
+class AddTranslateTest(TestCase):
+
+    def setUp(self):
+        pronunciation = PronunciationType.objects.create(pronunciation_type=PRONUNCIATION_TYPE)
+        kokama_word = WordKokama.objects.create(
+            word_kokama=KOKAMA_WORD,
+            pronunciation_type=pronunciation
+        )
+
+        context = [
+            # Repeated
+            {
+                'pronunciation_choises': pronunciation.id,
+                'word_kokama': kokama_word,
+                'word-portuguese-TOTAL_FORMS': '1',
+                'word-portuguese-0-word_portuguese': PORTUGUESE_WORD,
+                'phrase-TOTAL_FORMS': '1',
+                'phrase-0-phrase_portuguese': PORTUGUESE_PHRASE,
+                'phrase-0-phrase_kokama': KOKAMA_PHRASE
+            },
+            {
+                'pronunciation_choises': pronunciation.id,
+                'word_kokama': {
+                    'word_kokama': 'kokama word 2',
+                    'pronunciation_type': pronunciation
+                },
+                'word-portuguese-TOTAL_FORMS': '1',
+                'word-portuguese-0-word_portuguese': 'portuguese word 2',
+                'phrase-TOTAL_FORMS': '1',
+                'phrase-0-phrase_portuguese': 'portuguese phrase 2',
+                'phrase-0-phrase_kokama': 'kokama phrase 2'
+            }
+        ]
+
+        self.factory = RequestFactory()
+        self.request_wrong = self.factory.post('/', context[0])
+        self.request_correct_add_repeated = self.factory.post('/', context[0], REMOTE_ADDR=config('ALLOWED_IP_LIST'))
+        self.request_correct_add = self.factory.post('/', context[1], REMOTE_ADDR=config('ALLOWED_IP_LIST'))
+        self.request_correct_edit_repeated = self.factory.post('/', context[1], REMOTE_ADDR=config('ALLOWED_IP_LIST'))
+
+    def test_add_translate(self):
+
+        # Add
+        response = add_translate(self.request_wrong, id=None)
+        self.assertEqual(response.status_code, 403)
+
+        response = add_translate(self.request_correct_add_repeated, id=None)
+        self.assertEqual(response.status_code, 400)
+
+        response = add_translate(self.request_correct_add, id=None)
+        self.assertEqual(response.status_code, 200)
+
+        # Edit
+        response = add_translate(self.request_correct_edit_repeated, id=1)
+        self.assertEqual(response.status_code, 400)
