@@ -4,15 +4,15 @@
 
 ### Configurar as variáveis de ambiente
 * Criar um arquivo .env da api do projeto;
-SECRET_KEY=
-DEBUG=
-ALLOWED_HOSTS=
-...
+- SECRET_KEY=
+- DEBUG=
+- ALLOWED_HOSTS=
+- ...
 
 * Criar um arquivo .env do projeto;
-POSTGRES_DB=
-POSTGRES_USER=
-...
+ - POSTGRES_DB=
+ - POSTGRES_USER=
+- ...
 
 ## Execução
 
