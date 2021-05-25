@@ -150,7 +150,7 @@ class DictionaryConfigTest(TestCase):
 class AuthenticateTest(TestCase):
 
     def test_authenticate(self):
-        user_ip_correct = config('ALLOWED_IP_LIST')[0]
+        user_ip_correct = config('ALLOWED_IP_LIST')
         result = authenticate(user_ip_correct)
         self.assertTrue(result)
 
